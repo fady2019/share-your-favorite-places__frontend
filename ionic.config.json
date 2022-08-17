@@ -1,0 +1,7 @@
+{
+  "name": "share-your-favorite-places__frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
