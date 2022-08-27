@@ -1,0 +1,11 @@
+@media screen and (min-width: 400px) {
+    .dra-app-menu {
+        --min-width: 350px;
+    }
+}
+
+@media screen and (max-width: 399px) {
+    .dra-app-menu {
+        --width: 100%;
+    }
+}

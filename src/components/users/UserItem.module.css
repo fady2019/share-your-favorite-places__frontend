@@ -1,0 +1,8 @@
+.user-item__avatar {
+    width: 60px;
+    height: 60px;
+}
+
+.user-item__places-count {
+    font-weight: 400;
+}
