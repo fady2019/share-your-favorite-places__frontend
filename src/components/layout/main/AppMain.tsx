@@ -18,7 +18,7 @@ const AppMain: React.FC = (props) => {
                         <Route exact path="/users">
                             <Users />
                         </Route>
-                        <Route exact path="/places">
+                        <Route exact path="/:userId/places">
                             <UserPlaces />
                         </Route>
                         <Route exact path="/places/new">

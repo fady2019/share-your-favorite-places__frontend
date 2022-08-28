@@ -9,7 +9,17 @@ import PlaceCardActions from './PlaceCardActions';
 import classes from './PlaceItem.module.css';
 
 const PLaceItem: React.FC<PlaceItemI> = (props) => {
-    const { title, description, imgURL, address } = props;
+    const { title, description, imgURL, address, location } = props;
+
+    const openMapModalHandler = () => {
+        if (props.onOpenMapModal) {
+            props.onOpenMapModal({
+                isOpen: true,
+                address,
+                location,
+            });
+        }
+    };
 
     return (
         <IonCard className={classes['dra-place-card']} mode="ios">
@@ -22,7 +32,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
 
             <IonCardContent>{description}</IonCardContent>
 
-            <PlaceCardActions />
+            <PlaceCardActions onOpenMapModal={openMapModalHandler} />
         </IonCard>
     );
 };
