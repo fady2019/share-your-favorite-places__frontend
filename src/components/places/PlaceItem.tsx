@@ -2,14 +2,14 @@ import React from 'react';
 
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
 
-import { PlaceItemI } from '../../interfaces/components/places';
+import { PlaceItemI } from '../../interfaces/places';
 
 import PlaceCardActions from './PlaceCardActions';
 
 import classes from './PlaceItem.module.css';
 
 const PLaceItem: React.FC<PlaceItemI> = (props) => {
-    const { title, description, imgURL, address, location } = props;
+    const { title, description, imgURL, address, location } = props.placeInfo;
 
     const openMapModalHandler = () => {
         if (props.onOpenMapModal) {
@@ -22,7 +22,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
     };
 
     return (
-        <IonCard className={classes['dra-place-card']} mode="ios">
+        <IonCard className={classes['dra-place-card']}>
             <img src={imgURL} alt={`${title}-place`} />
 
             <IonCardHeader>

@@ -1,0 +1,4 @@
+.dra-app-refresher-content,
+.dra-app-refresher-content * {
+    color: var(--ion-color-warning) !important;
+}

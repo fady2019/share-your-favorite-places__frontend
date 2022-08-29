@@ -14,7 +14,7 @@ const DraCard: React.FC<any> = (props) => {
     const cardClasses = `${classes['card']} ${props.className}`;
 
     return (
-        <IonItem {...extraAttributes} className={cardClasses} color="light" lines="full" mode="ios">
+        <IonItem {...extraAttributes} className={cardClasses} color="light" lines="full">
             {props.children}
         </IonItem>
     );

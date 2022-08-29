@@ -6,7 +6,7 @@ import classes from './AppMenuHeader.module.css';
 
 const AppMenuHeader: React.FC<any> = () => {
     return (
-        <IonHeader mode="ios">
+        <IonHeader>
             <IonToolbar color="warning">
                 <IonTitle className="ion-text-start">Fady Emad</IonTitle>
 

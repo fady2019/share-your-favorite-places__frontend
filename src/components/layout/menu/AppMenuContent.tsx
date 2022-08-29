@@ -18,6 +18,11 @@ const MENU_ITEMS = [
         label: 'My Places',
         to: '/u1/places',
     },
+    {
+        id: 'NEW_PLACE_MENU_ITEM',
+        label: 'New Places',
+        to: '/places/new',
+    },
 ];
 
 const AppMenuContent: React.FC<any> = () => {
@@ -36,7 +41,7 @@ const AppMenuContent: React.FC<any> = () => {
     return (
         <IonContent color="dark">
             <DraScrollbar>
-                <IonList mode="ios">
+                <IonList>
                     {MENU_ITEMS.map((menuItem) => {
                         return (
                             <IonItem button key={menuItem.id} detail color="dark" onClick={navigationHandler.bind(null, menuItem.to)}>

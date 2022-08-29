@@ -6,11 +6,11 @@ import classes from './AppHeader.module.css';
 
 const AppHeader: React.FC = () => {
     return (
-        <IonHeader mode="ios">
+        <IonHeader>
             <IonToolbar color="warning">
                 <IonTitle>Favorite Places</IonTitle>
 
-                <IonMenuButton className={classes['dra-menu-btn']} menu="app-menu" autoHide={false} slot="start" color="dark"></IonMenuButton>
+                <IonMenuButton className={classes['dra-menu-btn']} menu="app-menu" autoHide={false} slot="start" color="dark" mode='md'/>
             </IonToolbar>
         </IonHeader>
     );

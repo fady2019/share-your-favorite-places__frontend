@@ -2,10 +2,11 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import PlaceList from '../../components/places/PlaceList';
-import { PlaceItemI } from '../../interfaces/components/places';
+import PlacesContainer from '../../components/places/PlacesContainer';
 
-const DUMMY_PLACES: PlaceItemI[] = [
+import { PLaceI } from '../../interfaces/places';
+
+const DUMMY_PLACES: PLaceI[] = [
     {
         id: 'p1',
         title: 'Empire State Building',
@@ -37,7 +38,7 @@ const UserPlaces: React.FC<any> = () => {
 
     const places = DUMMY_PLACES.filter((place) => place.creator === userId);
 
-    return <PlaceList places={places} />;
+    return <PlacesContainer places={places} />;
 };
 
 export default UserPlaces;

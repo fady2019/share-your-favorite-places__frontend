@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import Leaflet, { Icon, LatLngExpression } from 'leaflet';
 
-import { MapI } from '../../interfaces/components/maps';
+import { MapI } from '../../interfaces/maps';
 
 import classes from './Map.module.css';
 

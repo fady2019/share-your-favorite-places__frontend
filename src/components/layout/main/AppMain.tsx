@@ -8,10 +8,13 @@ import UserPlaces from '../../../pages/places/UserPlaces';
 import NewPlace from '../../../pages/places/NewPlace';
 
 import DraScrollbar from '../../ui/scrollbar/DraScrollbar';
+import DraAppRefresher from '../../ui/refresher/DraAppRefresher';
 
 const AppMain: React.FC = (props) => {
     return (
         <IonContent className="ion-padding" color="dark">
+            <DraAppRefresher />
+
             <IonRouterOutlet id="places-app">
                 <DraScrollbar>
                     <Switch>

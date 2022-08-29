@@ -1,11 +1,15 @@
 html,
-body{
+body {
     height: 100vh;
 }
 
 #root,
-.App{
+.App {
     height: 100%;
+}
+
+.App {
+    background-color: var(--ion-color-dark);
 }
 
 /*  */

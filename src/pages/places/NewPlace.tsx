@@ -1,7 +1,9 @@
 import React from 'react';
 
+import NewPlaceFormContainer from '../../components/places/new-place/NewPlaceFormContainer';
+
 const NewPlace: React.FC = () => {
-    return <h1>New Place Works!</h1>;
+    return <NewPlaceFormContainer />;
 };
 
 export default NewPlace;

@@ -2,14 +2,14 @@ import React from 'react';
 
 import { IonAvatar, IonLabel, IonBadge } from '@ionic/react';
 
-import { UserItemI } from '../../interfaces/components/users';
+import { UserItemI } from '../../interfaces/users';
 
 import DraCard from '../ui/card/DraCard';
 
 import classes from './UserItem.module.css';
 
 const UserItem: React.FC<UserItemI> = (props) => {
-    const { id, name, imgURL, placeCount } = props;
+    const { id, name, imgURL, placeCount } = props.userInfo;
 
     const ionBadgeClasses = `${classes['user-item__places-count']} ion-margin-top`;
 

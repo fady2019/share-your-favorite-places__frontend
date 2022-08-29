@@ -28,7 +28,9 @@ import './theme/variables.css';
 
 import './App.css';
 
-setupIonicReact();
+setupIonicReact({
+    mode: 'ios',
+});
 
 const App: React.FC = () => (
     <IonReactRouter>

@@ -1,0 +1,22 @@
+.dra-input-container{
+    --padding-start: 0;
+    --padding-end: 0;
+}
+
+.dra-input-label {
+    margin-left: 8px;
+    margin-right: 8px;
+    z-index: 10;
+}
+
+.dra-input {
+    background: var(--ion-color-light);
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    border-radius: 4px;
+}
+
+.dra-input-error{
+    padding-left: 2px;
+    font-size: 13px;
+}
