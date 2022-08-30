@@ -1,6 +1,6 @@
 .dra-input-container{
     --padding-start: 0;
-    --padding-end: 0;
+    --inner-padding-end: 0;
 }
 
 .dra-input-label {
@@ -10,7 +10,7 @@
 }
 
 .dra-input {
-    background: var(--ion-color-light);
+    background: var(--ion-color-light) !important;
     padding-left: 10px !important;
     padding-right: 10px !important;
     border-radius: 4px;

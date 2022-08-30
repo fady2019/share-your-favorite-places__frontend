@@ -1,64 +1,46 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 import { IonInput, IonItem, IonLabel, IonText, IonTextarea } from '@ionic/react';
 
-import { validate } from '../../../utilities/validators';
+import { InputActionTypeE } from '../../../interfaces/inputs';
 
-import { InputActionI, InputStateI } from '../../../interfaces/inputs';
+import { inputInitState, inputReducer } from './input-utilities';
 
 import classes from './Input.module.css';
 
-const inputInitState: InputStateI = {
-    value: '',
-    touched: false,
-    valid: false,
-    error: '',
-};
-
-const inputReducer = (state: InputStateI, action: InputActionI) => {
-    switch (action.type) {
-        case 'BLUR_INPUT': {
-            const validators = action.validators || [];
-            const validationResult = validate(state.value, validators);
-            const error = validationResult !== -1 ? validators[validationResult].msg : '';
-
-            return {
-                ...state,
-                touched: true,
-                valid: validationResult === -1,
-                error,
-            };
-        }
-        case 'CHANGE_INPUT': {
-            return {
-                ...state,
-                value: action.value,
-            };
-        }
-        default:
-            return state;
-    }
-};
-
 const FormInput: React.FC<any> = (props) => {
-    const [isFocused, setIsFocused] = useState<boolean>(false);
-
     const [inputState, inputDispatch] = useReducer(inputReducer, inputInitState);
 
     const inputClassName = `${classes['dra-input']} ${props.className}`;
-    const onFocusInput = props.onFocus;
-    const onBlurInput = props.onBlur;
+
+    const onFocusInput = props.onIonFocus || props.onFocus;
+    const onBlurInput = props.onIonBlur || props.onBlur;
+    const onChangeInput = props.onIonChange || props.onChange;
+
     const inputAttributes = { ...props };
 
     delete inputAttributes?.label;
     delete inputAttributes?.className;
     delete inputAttributes?.onFocus;
+    delete inputAttributes?.onIonFocus;
     delete inputAttributes?.onBlur;
+    delete inputAttributes?.onIonBlur;
+    delete inputAttributes?.onChange;
+    delete inputAttributes?.onIonChange;
 
-    let Input = props.inputType === 'textarea' ? IonTextarea : IonInput;
+    const { onGetInput, name: inputName, id: inputId } = props;
+    const { value: inputValue, valid: isInputValid } = inputState;
+
+    useEffect(() => {
+        if (onGetInput) {
+            onGetInput(inputName || inputId, inputValue, isInputValid);
+        }
+    }, [onGetInput, inputName, inputId, inputValue, isInputValid]);
 
     const focusInputHandler = (e: any) => {
-        setIsFocused(true);
+        inputDispatch({
+            type: InputActionTypeE.FOCUS_INPUT,
+        });
 
         if (onFocusInput) {
             onFocusInput(e);
@@ -66,10 +48,8 @@ const FormInput: React.FC<any> = (props) => {
     };
 
     const blurInputHandler = (e: any) => {
-        setIsFocused(false || !!e.target.value);
-
         inputDispatch({
-            type: 'BLUR_INPUT',
+            type: InputActionTypeE.BLUR_INPUT,
             validators: props.validators,
         });
 
@@ -80,27 +60,44 @@ const FormInput: React.FC<any> = (props) => {
 
     const changeInputHandler = (e: any) => {
         inputDispatch({
-            type: 'CHANGE_INPUT',
-            value: e.target.value,
+            type: InputActionTypeE.CHANGE_INPUT,
+            payload: e.target.value,
         });
+
+        if (onChangeInput) {
+            onChangeInput(e);
+        }
+    };
+
+    const isInputLabelFloating = inputState.focused || !!inputState.valid;
+
+    const inputCommonAttributes = {
+        className: inputClassName,
+        color: 'dark',
+        ...inputAttributes,
+        onIonFocus: focusInputHandler,
+        onIonBlur: blurInputHandler,
+        onIonChange: changeInputHandler,
+        onIonInput: props.onIonInput || props.onInput,
     };
 
     return (
         <IonItem className={classes['dra-input-container']} color="dark" lines="none">
             {props.label && (
-                <IonLabel className={classes['dra-input-label']} color={isFocused ? 'light' : 'dark'} position="floating">
+                <IonLabel
+                    className={classes['dra-input-label']}
+                    color={isInputLabelFloating ? 'light' : 'medium'}
+                    position="floating"
+                >
                     {props.label}
                 </IonLabel>
             )}
 
-            <Input 
-                className={inputClassName} 
-                color="dark" 
-                {...inputAttributes} 
-                onIonFocus={focusInputHandler} 
-                onIonBlur={blurInputHandler} 
-                onIonChange={changeInputHandler} 
-            />
+            {props.inputType === 'textarea' ? (
+                <IonTextarea {...inputCommonAttributes} rows={6} />
+            ) : (
+                <IonInput {...inputCommonAttributes} />
+            )}
 
             {inputState.touched && !inputState.valid && (
                 <IonText className={classes['dra-input-error']} color="danger">
