@@ -9,7 +9,13 @@ import { inputInitState, inputReducer } from './input-utilities';
 import classes from './Input.module.css';
 
 const FormInput: React.FC<any> = (props) => {
-    const [inputState, inputDispatch] = useReducer(inputReducer, inputInitState);
+    const inputInitialValue = props.value || inputInitState.value;
+    const inputInitialValid = props.valid || inputInitState.valid;
+    const [inputState, inputDispatch] = useReducer(inputReducer, {
+        ...inputInitState, 
+        value: inputInitialValue,
+        valid: inputInitialValid
+    });
 
     const inputClassName = `${classes['dra-input']} ${props.className}`;
 
@@ -27,6 +33,8 @@ const FormInput: React.FC<any> = (props) => {
     delete inputAttributes?.onIonBlur;
     delete inputAttributes?.onChange;
     delete inputAttributes?.onIonChange;
+    delete inputAttributes?.value
+    delete inputAttributes?.valid
 
     const { onGetInput, name: inputName, id: inputId } = props;
     const { value: inputValue, valid: isInputValid } = inputState;
@@ -75,6 +83,7 @@ const FormInput: React.FC<any> = (props) => {
         className: inputClassName,
         color: 'dark',
         ...inputAttributes,
+        value: inputState.value,
         onIonFocus: focusInputHandler,
         onIonBlur: blurInputHandler,
         onIonChange: changeInputHandler,

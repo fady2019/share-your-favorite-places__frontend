@@ -1,0 +1,24 @@
+.dra-delete-place-alert > .alert-wrapper {
+    background-color: var(--ion-color-dark);
+    color: var(--ion-color-light);
+}
+
+.dra-delete-place-alert > .alert-wrapper * {
+    color: inherit;
+}
+
+.dra-delete-place-alert > .alert-wrapper .delete-confirmation-btn,
+.dra-delete-place-alert > .alert-wrapper .delete-cancellation-btn {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.dra-delete-place-alert > .alert-wrapper .delete-confirmation-btn {
+    background-color: var(--ion-color-danger);
+    color: var(--ion-color-light);
+}
+
+.dra-delete-place-alert > .alert-wrapper .delete-cancellation-btn {
+    background-color: var(--ion-color-warning);
+    color: var(--ion-color-dark);
+}

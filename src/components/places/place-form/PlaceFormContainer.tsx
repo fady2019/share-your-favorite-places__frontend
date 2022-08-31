@@ -2,18 +2,22 @@ import React from 'react';
 
 import { IonCol, IonGrid, IonRow } from '@ionic/react';
 
-import NewPlaceForm from './NewPlaceForm';
+import { PlaceFormContainerI } from '../../../interfaces/places';
 
-const NewPlaceFormContainer: React.FC<any> = (props) => {
+import PlaceForm from './PlaceForm';
+
+const PlaceFormContainer: React.FC<PlaceFormContainerI> = (props) => {
+    delete props.children;
+
     return (
         <IonGrid>
             <IonRow>
                 <IonCol sizeSm="8" offsetSm="2" sizeMd="6" offsetMd="3" sizeLg="5" offsetLg="3.5">
-                    <NewPlaceForm />
+                    <PlaceForm {...props} />
                 </IonCol>
             </IonRow>
         </IonGrid>
     );
 };
 
-export default NewPlaceFormContainer;
+export default PlaceFormContainer;

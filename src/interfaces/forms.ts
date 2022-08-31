@@ -7,10 +7,8 @@ export interface FormInputI {
     valid: boolean;
 }
 
-export interface FormStateI {
-    inputs: {
-        [key: string]: FormInputI;
-    };
+export interface FormStateI<T> {
+    inputs: T;
     valid: boolean;
 }
 

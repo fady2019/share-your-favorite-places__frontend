@@ -6,6 +6,7 @@ import { IonContent, IonRouterOutlet } from '@ionic/react';
 import Users from '../../../pages/users/Users';
 import UserPlaces from '../../../pages/places/UserPlaces';
 import NewPlace from '../../../pages/places/NewPlace';
+import UpdatePlace from '../../../pages/places/UpdatePlace';
 
 import DraScrollbar from '../../ui/scrollbar/DraScrollbar';
 import DraAppRefresher from '../../ui/refresher/DraAppRefresher';
@@ -26,6 +27,9 @@ const AppMain: React.FC = (props) => {
                         </Route>
                         <Route exact path="/places/new">
                             <NewPlace />
+                        </Route>
+                        <Route exact path="/places/:placeId">
+                            <UpdatePlace />
                         </Route>
                         <Route exact path="/">
                             <Redirect to="/users" />

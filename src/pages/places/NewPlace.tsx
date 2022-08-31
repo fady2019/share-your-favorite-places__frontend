@@ -1,9 +1,11 @@
 import React from 'react';
 
-import NewPlaceFormContainer from '../../components/places/new-place/NewPlaceFormContainer';
+import PlaceFormContainer from '../../components/places/place-form/PlaceFormContainer';
+
+import { PlaceFormTypeE } from '../../interfaces/places';
 
 const NewPlace: React.FC = () => {
-    return <NewPlaceFormContainer />;
+    return <PlaceFormContainer formType={PlaceFormTypeE.NEW_PLACE_FORM} />;
 };
 
 export default NewPlace;

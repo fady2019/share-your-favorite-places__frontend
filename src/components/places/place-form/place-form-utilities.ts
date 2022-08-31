@@ -1,6 +1,7 @@
 import { FormActionI, FormActionTypeE, FormStateI } from '../../../interfaces/forms';
+import { PlaceFormStateInputsI } from '../../../interfaces/places';
 
-export const newPlaceFormInitialState: FormStateI = {
+export const placeFormInitialState: FormStateI<PlaceFormStateInputsI> = {
     inputs: {
         title: {
             value: '',
@@ -18,14 +19,14 @@ export const newPlaceFormInitialState: FormStateI = {
     valid: false,
 };
 
-export const newPlaceFormReducer = (state: FormStateI, action: FormActionI) => {
+export const placeFormReducer = (state: FormStateI<PlaceFormStateInputsI>, action: FormActionI) => {
     switch (action.type) {
         case FormActionTypeE.GET_INPUT: {
             let isFormValid = action.payload.isInputValid;
 
             for (const inputId in state.inputs) {
                 if (inputId !== action.payload.inputId) {
-                    isFormValid &&= state.inputs[inputId].valid;
+                    isFormValid &&= Object.getOwnPropertyDescriptor(state.inputs, inputId)?.value.valid;
                 }
             }
 

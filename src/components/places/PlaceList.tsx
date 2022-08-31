@@ -13,7 +13,8 @@ const PlaceList: React.FC<PlaceListI> = (props) => {
         {places.map((placeInfo) => {
             const place: PlaceItemI = {
                 placeInfo,
-                onOpenMapModal: props.onOpenMapModal
+                onOpenMapModal: props.onOpenMapModal,
+                onOpenDeletePlaceAlert: props.onOpenDeletePlaceAlert
             };
 
             return (

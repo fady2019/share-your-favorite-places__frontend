@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
+import {
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+} from '@ionic/react';
 
 import { PlaceItemI } from '../../interfaces/places';
 
@@ -9,7 +15,7 @@ import PlaceCardActions from './PlaceCardActions';
 import classes from './PlaceItem.module.css';
 
 const PLaceItem: React.FC<PlaceItemI> = (props) => {
-    const { title, description, imgURL, address, location } = props.placeInfo;
+    const { id, title, description, imgURL, address, location } = props.placeInfo;
 
     const openMapModalHandler = () => {
         if (props.onOpenMapModal) {
@@ -32,11 +38,13 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
 
             <IonCardContent>{description}</IonCardContent>
 
-            <PlaceCardActions onOpenMapModal={openMapModalHandler} />
+            <PlaceCardActions
+                onOpenMapModal={openMapModalHandler}
+                onOpenDeletePlaceAlert={props.onOpenDeletePlaceAlert.bind(null, id)}
+                placeId={props.placeInfo.id}
+            />
         </IonCard>
     );
 };
-
-//className="ion-padding-end"
 
 export default PLaceItem;

@@ -1,6 +1,7 @@
-import { MapModalI } from "./maps";
+import { FormInputI } from './forms';
+import { MapModalI } from './maps';
 
-export interface PLaceI{
+export interface PLaceI {
     id: string;
     title: string;
     description: string;
@@ -16,13 +17,41 @@ export interface PLaceI{
 export interface PlaceItemI {
     placeInfo: PLaceI;
     onOpenMapModal: (metadata: MapModalI) => any;
+    onOpenDeletePlaceAlert: (placeId: string) => any;
+}
+
+export interface DeletePlaceAlertI {
+    isOpen: boolean;
+    placeId: string;
+    onClose: (confirmDeletion: boolean, placeId: string) => any;
 }
 
 export interface PlaceListI {
     places: PLaceI[];
     onOpenMapModal: (metadata: MapModalI) => any;
+    onOpenDeletePlaceAlert: (placeId: string) => any;
 }
 
 export interface PlacesContainerI {
     places: PLaceI[];
+}
+
+export enum PlaceFormTypeE {
+    'NEW_PLACE_FORM',
+    'UPDATE_PLACE_FORM',
+}
+
+export interface PlaceFormContainerI {
+    formType: PlaceFormTypeE;
+    title?: string;
+    address?: string;
+    description?: string;
+}
+
+export interface PlaceFormI extends PlaceFormContainerI {}
+
+export interface PlaceFormStateInputsI {
+    title: FormInputI;
+    address: FormInputI;
+    description: FormInputI;
 }

@@ -1,41 +1,30 @@
-import React, { FormEvent, useCallback, useReducer } from 'react';
+import React, { FormEvent } from 'react';
 
 import { IonButton } from '@ionic/react';
 
-import { newPlaceFormInitialState, newPlaceFormReducer } from './new-place-form-utilities';
+import { useForm } from '../../../hooks/form-hook';
+import { placeFormInitialState, placeFormReducer } from './place-form-utilities';
 
-import { FormActionTypeE } from '../../../interfaces/forms';
+import { PlaceFormI, PlaceFormTypeE } from '../../../interfaces/places';
 
 import { VALIDATOR_REQUIRE, VALIDATOR_MIN_LENGTH } from '../../../utilities/validators';
 
 import FormInput from '../../ui/input/Input';
 
-import classes from './NewPlaceForm.module.css';
+import classes from './PlaceForm.module.css';
 
-const NewPlaceForm: React.FC<any> = (props) => {
-    const [formState, formDispatch] = useReducer(newPlaceFormReducer, newPlaceFormInitialState);
+const PlaceForm: React.FC<PlaceFormI> = (props) => {
+    const { formState, getInputHandler } = useForm(placeFormReducer, placeFormInitialState);
+
+    const { formType, address, description, title } = props;
 
     const isFormValid = formState.valid;
-
-    const getInputHandler = useCallback(
-        (inputId: string, inputValue: string, isInputValid: boolean) => {
-            formDispatch({
-                type: FormActionTypeE.GET_INPUT,
-                payload: {
-                    inputId,
-                    inputValue,
-                    isInputValid,
-                },
-            });
-        },
-        []
-    );
 
     const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (isFormValid) {
-            console.log(formState)
+            console.log(formState);
         }
     };
 
@@ -46,6 +35,8 @@ const NewPlaceForm: React.FC<any> = (props) => {
                 name="title"
                 type="text"
                 label="Title"
+                value={title || ''}
+                valid={formType === PlaceFormTypeE.UPDATE_PLACE_FORM}
                 validators={[VALIDATOR_REQUIRE('place title is required, please enter it!')]}
                 onGetInput={getInputHandler}
             />
@@ -55,6 +46,8 @@ const NewPlaceForm: React.FC<any> = (props) => {
                 name="address"
                 type="text"
                 label="Address"
+                value={address || ''}
+                valid={formType === PlaceFormTypeE.UPDATE_PLACE_FORM}
                 validators={[VALIDATOR_REQUIRE('place address is required, please enter it!')]}
                 onGetInput={getInputHandler}
             />
@@ -64,6 +57,8 @@ const NewPlaceForm: React.FC<any> = (props) => {
                 name="description"
                 inputType="textarea"
                 label="Description"
+                value={description || ''}
+                valid={formType === PlaceFormTypeE.UPDATE_PLACE_FORM}
                 validators={[
                     VALIDATOR_MIN_LENGTH(8, 'place description should be at least 8 characters!'),
                 ]}
@@ -78,11 +73,11 @@ const NewPlaceForm: React.FC<any> = (props) => {
                     type="submit"
                     disabled={!isFormValid}
                 >
-                    Add Place
+                    {formType === PlaceFormTypeE.UPDATE_PLACE_FORM? 'Update Place' : 'Add Place'}
                 </IonButton>
             </div>
         </form>
     );
 };
 
-export default NewPlaceForm;
+export default PlaceForm;
