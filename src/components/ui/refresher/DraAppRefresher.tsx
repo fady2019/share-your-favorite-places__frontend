@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IonContent, IonRefresher, IonRefresherContent } from '@ionic/react';
+import { IonRefresher, IonRefresherContent } from '@ionic/react';
 
 import classes from './DraAppRefresher.module.css';
 
