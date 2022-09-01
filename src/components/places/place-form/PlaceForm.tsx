@@ -3,18 +3,17 @@ import React, { FormEvent } from 'react';
 import { IonButton } from '@ionic/react';
 
 import { useForm } from '../../../hooks/form-hook';
-import { placeFormInitialState, placeFormReducer } from './place-form-utilities';
+import { placeFormInitialState } from './place-form-utilities';
 
-import { PlaceFormI, PlaceFormTypeE } from '../../../interfaces/places';
+import { PlaceFormI, PlaceFormStateInputsI, PlaceFormTypeE } from '../../../interfaces/places';
 
 import { VALIDATOR_REQUIRE, VALIDATOR_MIN_LENGTH } from '../../../utilities/validators';
 
 import FormInput from '../../ui/input/Input';
-
-import classes from './PlaceForm.module.css';
+import FormActions from '../../shared/FormActions';
 
 const PlaceForm: React.FC<PlaceFormI> = (props) => {
-    const { formState, getInputHandler } = useForm(placeFormReducer, placeFormInitialState);
+    const { formState, getInputHandler } = useForm<PlaceFormStateInputsI>(placeFormInitialState);
 
     const { formType, address, description, title } = props;
 
@@ -65,9 +64,9 @@ const PlaceForm: React.FC<PlaceFormI> = (props) => {
                 onGetInput={getInputHandler}
             />
 
-            <div className={classes['dra-form-actions']}>
+            <FormActions>
                 <IonButton
-                    className={classes['dra-form-actions__btn']}
+                    className='dra-form-actions__btn'
                     color="warning"
                     strong
                     type="submit"
@@ -75,7 +74,7 @@ const PlaceForm: React.FC<PlaceFormI> = (props) => {
                 >
                     {formType === PlaceFormTypeE.UPDATE_PLACE_FORM? 'Update Place' : 'Add Place'}
                 </IonButton>
-            </div>
+            </FormActions>
         </form>
     );
 };

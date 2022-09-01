@@ -1,5 +1,6 @@
 export enum FormActionTypeE {
-    'GET_INPUT',
+    GET_INPUT,
+    SET_INPUTS,
 }
 
 export interface FormInputI {

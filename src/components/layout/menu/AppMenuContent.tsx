@@ -3,7 +3,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { IonButton, IonContent, IonItem, IonLabel, IonList } from '@ionic/react';
-import { menuController } from '@ionic/core/components';
 
 import DraScrollbar from '../../ui/scrollbar/DraScrollbar';
 
@@ -25,17 +24,15 @@ const MENU_ITEMS = [
     },
 ];
 
-const AppMenuContent: React.FC<any> = () => {
+const AppMenuContent: React.FC<any> = (props) => {
     const history = useHistory();
 
-    const closeMenuHandler = async () => {
-        await menuController.close('app-menu');
-    };
+    const { onCloseMenu } = props;
 
     const navigationHandler = (to: string) => {
         history.replace(to);
 
-        closeMenuHandler();
+        onCloseMenu();
     };
 
     return (
@@ -44,14 +41,26 @@ const AppMenuContent: React.FC<any> = () => {
                 <IonList>
                     {MENU_ITEMS.map((menuItem) => {
                         return (
-                            <IonItem button key={menuItem.id} detail color="dark" onClick={navigationHandler.bind(null, menuItem.to)}>
+                            <IonItem
+                                button
+                                key={menuItem.id}
+                                detail
+                                color="dark"
+                                onClick={navigationHandler.bind(null, menuItem.to)}
+                            >
                                 <IonLabel>{menuItem.label}</IonLabel>
                             </IonItem>
                         );
                     })}
                 </IonList>
 
-                <IonButton className="ion-margin" expand="block" strong={true} color="warning" onClick={closeMenuHandler}>
+                <IonButton
+                    className="ion-margin"
+                    expand="block"
+                    strong={true}
+                    color="warning"
+                    onClick={onCloseMenu}
+                >
                     Close
                 </IonButton>
             </DraScrollbar>

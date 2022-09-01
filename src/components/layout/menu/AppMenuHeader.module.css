@@ -1,3 +1,7 @@
-.dra-app-menu__user-avatar{
+.dra-app-menu__header-link {
+    color: inherit;
+}
+
+.dra-app-menu__user-avatar {
     margin: 8px 16px;
 }
