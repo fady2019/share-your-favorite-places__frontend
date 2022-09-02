@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { IonText } from '@ionic/react';
+
 import { AuthFormContainerI, AuthModeE } from '../../interfaces/auth';
 
 import FormContainer from '../shared/FormContainer';
@@ -16,6 +18,10 @@ const AuthFormContainer: React.FC<AuthFormContainerI> = (props) => {
 
     return (
         <FormContainer>
+            <IonText>
+                <h2>{authMode === AuthModeE.LOGIN ? 'Login' : 'Sign Up'}</h2>
+            </IonText>
+            
             <AuthForm mode={authMode} onSwitchMode={switchAuthModeHandler} />
         </FormContainer>
     );

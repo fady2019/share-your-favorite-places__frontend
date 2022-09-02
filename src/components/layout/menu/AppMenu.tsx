@@ -14,7 +14,12 @@ const AppMenu: React.FC<any> = () => {
     };
 
     return (
-        <IonMenu className={classes['dra-app-menu']} menuId="app-menu" contentId="places-app" side="start">
+        <IonMenu
+            className={classes['dra-app-menu']}
+            menuId="app-menu"
+            contentId="places-app"
+            side="start"
+        >
             <AppMenuHeader onCloseMenu={closeMenuHandler} />
 
             <AppMenuContent onCloseMenu={closeMenuHandler} />

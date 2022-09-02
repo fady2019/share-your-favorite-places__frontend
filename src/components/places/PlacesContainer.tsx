@@ -1,4 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
+
+import { useSelector } from 'react-redux';
 
 import { IonGrid } from '@ionic/react';
 
@@ -7,59 +9,24 @@ import DeletePlaceAlert from './DeletePlaceAlert';
 import PlaceList from './PlaceList';
 import DraMiniCard from '../ui/card/DraMiniCard';
 
+import { AppStoreI } from '../../interfaces/store';
 import { PlacesContainerI } from '../../interfaces/places';
-import { MapModalI } from '../../interfaces/maps';
-
-const DEFAULT_MAP_MODAL: MapModalI = {
-    isOpen: false,
-    address: '',
-    location: {
-        lat: 0,
-        lng: 0,
-    },
-};
 
 const PlacesContainer: React.FC<PlacesContainerI> = (props) => {
-    const [mapModal, setMapModal] = useState<MapModalI>(DEFAULT_MAP_MODAL);
-    const [placeIdOfDeletionALert, setPlaceIdOfnDeletionALert] = useState<string>('');
+    const mapModal = useSelector((state: AppStoreI) => state.ui.placeMapModal);
+
+    const deletionAlert = useSelector((state: AppStoreI) => state.ui.placeDeletionAlert);
 
     const arePlacesFound = props.places.length > 0;
 
-    const openMapModalHandler = (mapModalMetadata: MapModalI) => {
-        setMapModal(mapModalMetadata);
-    };
-
-    const closeMapModalHandler = () => {
-        setMapModal(DEFAULT_MAP_MODAL);
-    };
-
-    const openDeletePlaceAlert = (placeId: string) => {
-        setPlaceIdOfnDeletionALert(placeId);
-    };
-
-    const closeDeletePlaceAlert = (confirmDeletion: boolean, placeId: string) => {
-        console.log('confirmDeletion:', confirmDeletion, 'placeId:', placeId)
-        setPlaceIdOfnDeletionALert('');
-    };
-
     return (
         <Fragment>
-            <MapModal {...mapModal} onClose={closeMapModalHandler} />
+            <MapModal {...mapModal} />
 
-            <DeletePlaceAlert 
-                isOpen={!!placeIdOfDeletionALert} 
-                placeId={placeIdOfDeletionALert}
-                onClose={closeDeletePlaceAlert} 
-            />
+            <DeletePlaceAlert {...deletionAlert} />
 
             <IonGrid className="ion-padding">
-                {arePlacesFound && (
-                    <PlaceList
-                        places={props.places}
-                        onOpenMapModal={openMapModalHandler}
-                        onOpenDeletePlaceAlert={openDeletePlaceAlert}
-                    />
-                )}
+                {arePlacesFound && <PlaceList places={props.places} />}
 
                 {!arePlacesFound && (
                     <DraMiniCard>

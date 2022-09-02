@@ -17,7 +17,9 @@ const FormInput: React.FC<any> = (props) => {
         valid: inputInitialValid
     });
 
-    const inputClassName = `${classes['dra-input']} ${props.className}`;
+    const isInvalid = inputState.touched && !inputState.valid;
+
+    const inputClassName = `${classes['dra-input']} ${props.className} ${isInvalid && classes['dra-input--invalid']}`;
 
     const onFocusInput = props.onIonFocus || props.onFocus;
     const onBlurInput = props.onIonBlur || props.onBlur;
@@ -77,11 +79,12 @@ const FormInput: React.FC<any> = (props) => {
         }
     };
 
-    const isInputLabelFloating = inputState.focused || !!inputState.valid;
+    const isInputLabelStacked = inputState.focused || !!inputState.valid;
 
     const inputCommonAttributes = {
         className: inputClassName,
         color: 'dark',
+        clearOnEdit: false,
         ...inputAttributes,
         value: inputState.value,
         onIonFocus: focusInputHandler,
@@ -95,8 +98,8 @@ const FormInput: React.FC<any> = (props) => {
             {props.label && (
                 <IonLabel
                     className={classes['dra-input-label']}
-                    color={isInputLabelFloating ? 'light' : 'medium'}
-                    position="floating"
+                    color={isInvalid? 'danger' : isInputLabelStacked ? 'light' : 'medium'}
+                    position={isInvalid || isInputLabelStacked? 'stacked' : 'floating'}
                 >
                     {props.label}
                 </IonLabel>
@@ -108,9 +111,9 @@ const FormInput: React.FC<any> = (props) => {
                 <IonInput {...inputCommonAttributes} />
             )}
 
-            {inputState.touched && !inputState.valid && (
+            {isInvalid && (
                 <IonText className={classes['dra-input-error']} color="danger">
-                    <p>{inputState.error}</p>
+                    <p>{inputState.error || 'You entered an invalid value!'}</p>
                 </IonText>
             )}
         </IonItem>

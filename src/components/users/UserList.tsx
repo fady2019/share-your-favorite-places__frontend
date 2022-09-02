@@ -13,12 +13,23 @@ const UserList: React.FC<UserListI> = (props) => {
         <IonRow>
             {users.map((userInfo) => {
                 const user: UserItemI = {
-                    userInfo
-                } 
+                    userInfo,
+                };
 
-                return<IonCol key={user.userInfo.id} sizeXs="12" sizeSm="8" offsetSm="2" sizeMd="4" offsetMd="1.25" sizeLg="3" offsetLg="0.75">
-                    <UserItem {...user} />
-                </IonCol>
+                return (
+                    <IonCol
+                        key={user.userInfo.id}
+                        sizeXs="12"
+                        sizeSm="8"
+                        offsetSm="2"
+                        sizeMd="5"
+                        offsetMd="0.667"
+                        sizeLg="3.8"
+                        offsetLg="0.15"
+                    >
+                        <UserItem {...user} />
+                    </IonCol>
+                );
             })}
         </IonRow>
     );

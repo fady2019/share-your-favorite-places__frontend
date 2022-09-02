@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
-
 import { trashBin, location, pencil } from 'ionicons/icons';
 
 import PlaceCardActionBtn from './PlaceCardActionBtn';
@@ -9,12 +7,6 @@ import PlaceCardActionBtn from './PlaceCardActionBtn';
 import classes from './PlaceCardActions.module.css';
 
 const PlaceCardActions: React.FC<any> = (props) => {
-    const history = useHistory();
-
-    const editPlaceHandler = () => {
-        history.push('/places/' + props.placeId);
-    };
-
     return (
         <div className={classes['dra-card-actions']}>
             <div className={classes['dra-card-actions__buttons']}>
@@ -23,7 +15,7 @@ const PlaceCardActions: React.FC<any> = (props) => {
                     color="dark"
                     label="Location"
                     icon={location}
-                    onClick={props.onOpenMapModal}
+                    onClick={props.onOpenPlaceMapModal}
                 />
 
                 <PlaceCardActionBtn
@@ -31,7 +23,7 @@ const PlaceCardActions: React.FC<any> = (props) => {
                     color="warning"
                     label="Edit"
                     icon={pencil}
-                    onClick={editPlaceHandler}
+                    onClick={props.onEditPlace}
                 />
 
                 <PlaceCardActionBtn
@@ -39,7 +31,7 @@ const PlaceCardActions: React.FC<any> = (props) => {
                     color="danger"
                     label="Delete"
                     icon={trashBin}
-                    onClick={props.onOpenDeletePlaceAlert}
+                    onClick={props.onOpenPlaceDeletionAlert}
                 />
             </div>
         </div>

@@ -5,7 +5,6 @@ export interface MapModalI {
         lat: number;
         lng: number;
     };
-    onClose?: () => any;
 }
 
 export interface MapI {

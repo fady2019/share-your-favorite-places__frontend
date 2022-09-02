@@ -1,4 +1,4 @@
-.dra-input-container{
+.dra-input-container {
     --padding-start: 0;
     --inner-padding-end: 0;
 }
@@ -16,7 +16,12 @@
     border-radius: 4px;
 }
 
-.dra-input-error{
+.dra-input--invalid {
+    border: 1px solid var(--ion-color-danger);
+    background: #f3b4bc !important;
+}
+
+.dra-input-error {
     padding-left: 2px;
     font-size: 13px;
 }

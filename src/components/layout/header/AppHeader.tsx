@@ -10,7 +10,14 @@ const AppHeader: React.FC = () => {
             <IonToolbar color="warning">
                 <IonTitle>Favorite Places</IonTitle>
 
-                <IonMenuButton className={classes['dra-menu-btn']} menu="app-menu" autoHide={false} slot="start" color="dark" mode='md'/>
+                <IonMenuButton
+                    className={classes['dra-menu-btn']}
+                    menu="app-menu"
+                    autoHide={false}
+                    slot="start"
+                    color="dark"
+                    mode="md"
+                />
             </IonToolbar>
         </IonHeader>
     );

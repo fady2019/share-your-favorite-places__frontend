@@ -4,15 +4,19 @@ import { useParams } from 'react-router-dom';
 import PlaceFormContainer from '../../components/places/place-form/PlaceFormContainer';
 import { PlaceFormTypeE } from '../../interfaces/places';
 
+import { DUMMY_PLACES } from './dummy-places';
+
 const UpdatePlace: React.FC = () => {
-    const placeId = useParams<{placeId: string}>().placeId;
+    const { placeId } = useParams<{ placeId: string }>();
+
+    const place = DUMMY_PLACES.find(place => place.id === placeId);
 
     return (
         <PlaceFormContainer
             formType={PlaceFormTypeE.UPDATE_PLACE_FORM}
-            title={"test title" + placeId}
-            address={"test address" + placeId}
-            description={"test description" + placeId}
+            title={place?.title}
+            address={place?.address}
+            description={place?.description}
         />
     );
 };

@@ -1,9 +1,9 @@
-import { InputValidatorI } from "./validators";
+import { InputValidatorI } from './validators';
 
 export enum InputActionTypeE {
-    'CHANGE_INPUT',
-    'FOCUS_INPUT',
-    'BLUR_INPUT'
+    CHANGE_INPUT,
+    FOCUS_INPUT,
+    BLUR_INPUT,
 }
 
 export interface InputStateI {
@@ -17,5 +17,5 @@ export interface InputStateI {
 export interface InputActionI {
     type: InputActionTypeE;
     payload?: any;
-    validators?: InputValidatorI[] 
+    validators?: InputValidatorI[];
 }

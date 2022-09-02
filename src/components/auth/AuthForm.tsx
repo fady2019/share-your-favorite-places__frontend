@@ -1,4 +1,4 @@
-import React, { FormEvent, Fragment, useEffect } from 'react';
+import React, { FormEvent, Fragment } from 'react';
 
 import { useForm } from '../../hooks/form-hook';
 
@@ -25,7 +25,17 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
         formInitialState(authMode)
     );
 
-    useEffect(() => {
+    const isFormValid = formState.valid;
+
+    const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (isFormValid) {
+            console.log(formState);
+        }
+    };
+
+    const switchAuthModeHandler = () => {
         const newState: FormStateI<AuthFormStateInputI> = formInitialState(authMode);
 
         newState.inputs.email = { ...formState.inputs.email };
@@ -41,17 +51,9 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
             type: FormActionTypeE.SET_INPUTS,
             payload: newState,
         });
-    }, [formDispatch, authMode]);
-
-    const isFormValid = formState.valid;
-
-    const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (isFormValid) {
-            console.log(formState);
-        }
-    };
+        
+        props.onSwitchMode();
+    }
 
     return (
         <form onSubmit={submitFormHandler}>
@@ -87,6 +89,7 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
                     VALIDATOR_EMAIL('Email is invalid, please enter valid one!'),
                 ]}
                 onGetInput={getInputHandler}
+                focus
             />
 
             <FormInput
@@ -119,7 +122,8 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
                     color="warning"
                     strong
                     type="button"
-                    onClick={props.onSwitchMode}
+                    fill='outline'
+                    onClick={switchAuthModeHandler}
                 >
                     Switch to {authMode === AuthModeE.LOGIN ? 'Sign Up' : 'Login'}
                 </IonButton>

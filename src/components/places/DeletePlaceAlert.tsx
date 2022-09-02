@@ -1,12 +1,22 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import { IonAlert } from '@ionic/react';
+
+import { uiActions } from '../../store/slices/ui/ui-slice';
 
 import { DeletePlaceAlertI } from '../../interfaces/places';
 
 import './DeletePlaceAlert.css';
 
 const DeletePlaceAlert: React.FC<DeletePlaceAlertI> = (props) => {
+    const dispatch = useDispatch();
+
+    const closeAlertHandler = () => {
+        dispatch(uiActions.closePlaceDeletionAlert())
+    }
+
     return (
         <IonAlert
             isOpen={props.isOpen}
@@ -18,17 +28,13 @@ const DeletePlaceAlert: React.FC<DeletePlaceAlertI> = (props) => {
                     text: 'No',
                     cssClass: 'delete-cancellation-btn',
                     role: 'cancel',
-                    handler: () => {
-                        props.onClose(false, props.placeId);
-                    },
+                    handler: closeAlertHandler,
                 },
                 {
                     text: 'Yes',
                     cssClass: 'delete-confirmation-btn',
                     role: 'delete',
-                    handler: () => {
-                        props.onClose(true, props.placeId);
-                    },
+                    handler: closeAlertHandler,
                 },
             ]}
         />
