@@ -9,7 +9,6 @@ export interface AuthFormContainerI {}
 
 export interface AuthFormI {
     mode: AuthModeE;
-    onSwitchMode: () => any
 }
 
 export interface AuthFormStateInputI {

@@ -1,3 +1,4 @@
+import { AuthModeE } from './auth';
 import { MapModalI } from './maps';
 import { DeletePlaceAlertI } from './places';
 
@@ -11,6 +12,12 @@ export interface UISliceI {
     placeDeletionAlert: DeletePlaceAlertI;
 }
 
+export interface AuthSliceI {
+    authMode: AuthModeE;
+    isAuth: boolean;
+}
+
 export interface AppStoreI {
     ui: UISliceI;
+    auth: AuthSliceI;
 }

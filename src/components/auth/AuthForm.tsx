@@ -1,6 +1,9 @@
 import React, { FormEvent, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { useForm } from '../../hooks/form-hook';
+import { authActions } from '../../store/slices/auth/auth-slice';
 
 import { IonButton } from '@ionic/react';
 
@@ -19,6 +22,9 @@ import FormActions from '../shared/FormActions';
 import { FormActionTypeE, FormStateI } from '../../interfaces/forms';
 
 const AuthForm: React.FC<AuthFormI> = (props) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const { mode: authMode } = props;
 
     const { formState, formDispatch, getInputHandler } = useForm<AuthFormStateInputI>(
@@ -31,7 +37,8 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
         e.preventDefault();
 
         if (isFormValid) {
-            console.log(formState);
+            dispatch(authActions.login());
+            history.replace('/');
         }
     };
 
@@ -41,7 +48,8 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
         newState.inputs.email = { ...formState.inputs.email };
         newState.inputs.password = { ...formState.inputs.password };
 
-        if (authMode === AuthModeE.LOGIN) {
+        // if the current mode is sign up then we will switch to login mode
+        if (authMode === AuthModeE.SIGN_UP) {
             delete newState.inputs.firstName;
             delete newState.inputs.lastName;
             newState.valid = newState.inputs.email.valid && newState.inputs.password.valid;
@@ -51,9 +59,9 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
             type: FormActionTypeE.SET_INPUTS,
             payload: newState,
         });
-        
-        props.onSwitchMode();
-    }
+
+        dispatch(authActions.switchAuthMode());
+    };
 
     return (
         <form onSubmit={submitFormHandler}>
@@ -122,7 +130,7 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
                     color="warning"
                     strong
                     type="button"
-                    fill='outline'
+                    fill="outline"
                     onClick={switchAuthModeHandler}
                 >
                     Switch to {authMode === AuthModeE.LOGIN ? 'Sign Up' : 'Login'}

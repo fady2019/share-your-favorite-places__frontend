@@ -1,0 +1,49 @@
+.dra-page-404 {
+    text-align: center;
+    max-width: 768px;
+    margin: auto;
+    margin-bottom: 35px;
+}
+
+.dra-page-404__title {
+    font-size: 10em;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px var(--ion-color-warning);
+}
+
+.dra-page-404__title::first-letter {
+    font-size: 1.2em;
+}
+
+.dra-page-404__subtitle {
+    font-size: 1.8em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dra-page-404__paragraph {
+    width: 80%;
+    font-size: 1.4em;
+    padding: 16px;
+    margin: 22px auto 16px;
+}
+
+.dra-page-404__home-btn {
+    --border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+    .dra-page-404__title {
+        font-size: 7em;
+    }
+
+    .dra-page-404__subtitle {
+        font-size: 1.2em;
+    }
+
+    .dra-page-404__paragraph {
+        width: 90%;
+        font-size: 1.2em;
+        padding: 8px;
+    }
+}
