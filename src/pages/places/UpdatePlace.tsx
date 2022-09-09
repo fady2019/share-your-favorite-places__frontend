@@ -9,7 +9,7 @@ import { DUMMY_PLACES } from './dummy-places';
 const UpdatePlace: React.FC = () => {
     const { placeId } = useParams<{ placeId: string }>();
 
-    const place = DUMMY_PLACES.find(place => place.id === placeId);
+    const place = DUMMY_PLACES.find((place) => place.id === placeId);
 
     return (
         <PlaceFormContainer
@@ -17,6 +17,7 @@ const UpdatePlace: React.FC = () => {
             title={place?.title}
             address={place?.address}
             description={place?.description}
+            imgURL={place?.imgURL}
         />
     );
 };
