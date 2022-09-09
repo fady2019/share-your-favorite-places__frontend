@@ -3,12 +3,6 @@
     --inner-padding-end: 0;
 }
 
-.dra-input-label {
-    margin-left: 8px;
-    margin-right: 8px;
-    z-index: 10;
-}
-
 .dra-input {
     background: var(--ion-color-light) !important;
     padding-left: 10px !important;
@@ -19,9 +13,4 @@
 .dra-input--invalid {
     border: 1px solid var(--ion-color-danger);
     background: #f3b4bc !important;
-}
-
-.dra-input-error {
-    padding-left: 2px;
-    font-size: 13px;
 }

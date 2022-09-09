@@ -1,42 +1,53 @@
 import React, { useEffect, useReducer } from 'react';
 
-import { IonInput, IonItem, IonLabel, IonText, IonTextarea } from '@ionic/react';
+import { IonInput, IonItem, IonTextarea } from '@ionic/react';
 
 import { InputActionTypeE } from '../../../interfaces/inputs';
 
 import { inputInitState, inputReducer } from './input-utilities';
 
+import InputLabel from '../input-label/InputLabel';
+import InputError from '../input-error/InputError';
+
 import classes from './Input.module.css';
+
+const getAttributes = (props: any) => {
+    const attributes = { ...props };
+
+    delete attributes?.label;
+    delete attributes?.className;
+    delete attributes?.onFocus;
+    delete attributes?.onIonFocus;
+    delete attributes?.onBlur;
+    delete attributes?.onIonBlur;
+    delete attributes?.onChange;
+    delete attributes?.onIonChange;
+    delete attributes?.value;
+    delete attributes?.valid;
+
+    return attributes;
+};
 
 const FormInput: React.FC<any> = (props) => {
     const inputInitialValue = props.value || inputInitState.value;
     const inputInitialValid = props.valid || inputInitState.valid;
     const [inputState, inputDispatch] = useReducer(inputReducer, {
-        ...inputInitState, 
+        ...inputInitState,
         value: inputInitialValue,
-        valid: inputInitialValid
+        valid: inputInitialValid,
     });
 
     const isInvalid = inputState.touched && !inputState.valid;
 
-    const inputClassName = `${classes['dra-input']} ${props.className} ${isInvalid && classes['dra-input--invalid']}`;
+    const inputClassName = `${classes['dra-input']} ${props.className} ${
+        isInvalid && classes['dra-input--invalid']
+    }`;
 
     const onFocusInput = props.onIonFocus || props.onFocus;
     const onBlurInput = props.onIonBlur || props.onBlur;
     const onChangeInput = props.onIonChange || props.onChange;
 
-    const inputAttributes = { ...props };
-
-    delete inputAttributes?.label;
-    delete inputAttributes?.className;
-    delete inputAttributes?.onFocus;
-    delete inputAttributes?.onIonFocus;
-    delete inputAttributes?.onBlur;
-    delete inputAttributes?.onIonBlur;
-    delete inputAttributes?.onChange;
-    delete inputAttributes?.onIonChange;
-    delete inputAttributes?.value
-    delete inputAttributes?.valid
+    const inputAttributes = getAttributes(props);
 
     const { onGetInput, name: inputName, id: inputId } = props;
     const { value: inputValue, valid: isInputValid } = inputState;
@@ -95,15 +106,7 @@ const FormInput: React.FC<any> = (props) => {
 
     return (
         <IonItem className={classes['dra-input-container']} color="dark" lines="none">
-            {props.label && (
-                <IonLabel
-                    className={classes['dra-input-label']}
-                    color={isInvalid? 'danger' : isInputLabelStacked ? 'light' : 'medium'}
-                    position={isInvalid || isInputLabelStacked? 'stacked' : 'floating'}
-                >
-                    {props.label}
-                </IonLabel>
-            )}
+            <InputLabel label={props.label} isInvalid={isInvalid} stacked={isInputLabelStacked} />
 
             {props.inputType === 'textarea' ? (
                 <IonTextarea {...inputCommonAttributes} rows={6} />
@@ -111,11 +114,7 @@ const FormInput: React.FC<any> = (props) => {
                 <IonInput {...inputCommonAttributes} />
             )}
 
-            {isInvalid && (
-                <IonText className={classes['dra-input-error']} color="danger">
-                    <p>{inputState.error || 'You entered an invalid value!'}</p>
-                </IonText>
-            )}
+            <InputError show={isInvalid} error={inputState.error} />
         </IonItem>
     );
 };
