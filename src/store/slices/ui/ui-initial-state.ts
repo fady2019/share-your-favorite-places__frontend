@@ -14,7 +14,13 @@ export const placeDeletionAlertInitialState = {
     placeId: '',
 };
 
+export const pickedImageModalInitialState = {
+    isOpen: false,
+    imgSrc: '',
+};
+
 export const uiSliceInitialState: UISliceI = {
     placeMapModal: placeMapModalInitialState,
     placeDeletionAlert: placeDeletionAlertInitialState,
+    pickedImageModal: pickedImageModalInitialState,
 };
