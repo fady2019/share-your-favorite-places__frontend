@@ -1,0 +1,59 @@
+.dra-image-picker {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --background: transparent;
+    --min-height: 68px;
+}
+
+.dra-image-picker__main-input {
+    display: none;
+}
+
+.dra-image-picker__image-preview {
+    align-self: flex-end;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.dra-image-picker__custom-input {
+    overflow: hidden;
+    position: relative;
+    gap: 8px;
+    width: 100%;
+    height: 38px;
+    padding: 8px 10px;
+    color: var(--ion-color-dark);
+    background: var(--ion-color-light) !important;
+    border-radius: 4px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.dra-image-picker__custom-input .file-name {
+    width: 90%;
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dra-image-picker__custom-input .clear-btn {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: var(--ion-color-warning);
+    padding: 3px;
+}
+
+.dra-image-picker__custom-input .clear-btn:hover {
+    opacity: 0.8;
+}
+
+.dra-image-picker__custom-input--invalid {
+    border: 1px solid var(--ion-color-danger);
+    background: #f3b4bc !important;
+}

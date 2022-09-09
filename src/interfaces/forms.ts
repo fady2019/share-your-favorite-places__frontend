@@ -4,7 +4,7 @@ export enum FormActionTypeE {
 }
 
 export interface FormInputI {
-    value: string;
+    value: any;
     valid: boolean;
 }
 

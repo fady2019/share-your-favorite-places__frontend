@@ -40,6 +40,7 @@ export interface PlaceFormContainerI {
     title?: string;
     address?: string;
     description?: string;
+    imgURL?: string;
 }
 
 export interface PlaceFormI extends PlaceFormContainerI {}
@@ -47,5 +48,6 @@ export interface PlaceFormI extends PlaceFormContainerI {}
 export interface PlaceFormStateInputsI {
     title: FormInputI;
     address: FormInputI;
+    image: FormInputI;
     description: FormInputI;
 }

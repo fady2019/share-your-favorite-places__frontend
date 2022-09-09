@@ -9,13 +9,14 @@ import { PlaceFormI, PlaceFormStateInputsI, PlaceFormTypeE } from '../../../inte
 
 import { VALIDATOR_REQUIRE, VALIDATOR_MIN_LENGTH } from '../../../utilities/validators';
 
+import ImagePicker from '../../ui/image-picker/ImagePicker';
 import FormInput from '../../ui/input/Input';
 import FormActions from '../../shared/FormActions';
 
 const PlaceForm: React.FC<PlaceFormI> = (props) => {
     const { formState, getInputHandler } = useForm<PlaceFormStateInputsI>(placeFormInitialState);
 
-    const { formType, address, description, title } = props;
+    const { formType, address, description, title, imgURL } = props;
 
     const isFormValid = formState.valid;
 
@@ -51,6 +52,17 @@ const PlaceForm: React.FC<PlaceFormI> = (props) => {
                 onGetInput={getInputHandler}
             />
 
+            <ImagePicker 
+                id="image"
+                name="image"
+                label="Image" 
+                value={imgURL || ''}
+                valid={formType === PlaceFormTypeE.UPDATE_PLACE_FORM}
+                accept="image/png, image/jpeg, image/jpg" 
+                multiple={false} 
+                onGetFile={getInputHandler}
+            />
+
             <FormInput
                 id="description"
                 name="description"
@@ -58,21 +70,19 @@ const PlaceForm: React.FC<PlaceFormI> = (props) => {
                 label="Description"
                 value={description || ''}
                 valid={formType === PlaceFormTypeE.UPDATE_PLACE_FORM}
-                validators={[
-                    VALIDATOR_MIN_LENGTH(8, 'place description should be at least 8 characters!'),
-                ]}
+                validators={[VALIDATOR_MIN_LENGTH(8, 'place description should be at least 8 characters!')]}
                 onGetInput={getInputHandler}
             />
 
             <FormActions>
                 <IonButton
-                    className='dra-form-actions__btn'
+                    className="dra-form-actions__btn"
                     color="warning"
                     strong
                     type="submit"
                     disabled={!isFormValid}
                 >
-                    {formType === PlaceFormTypeE.UPDATE_PLACE_FORM? 'Update Place' : 'Add Place'}
+                    {formType === PlaceFormTypeE.UPDATE_PLACE_FORM ? 'Update Place' : 'Add Place'}
                 </IonButton>
             </FormActions>
         </form>

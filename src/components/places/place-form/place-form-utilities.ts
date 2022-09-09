@@ -11,6 +11,10 @@ export const placeFormInitialState: FormStateI<PlaceFormStateInputsI> = {
             value: '',
             valid: false,
         },
+        image: {
+            value: null,
+            valid: false,
+        },
         description: {
             value: '',
             valid: false,
