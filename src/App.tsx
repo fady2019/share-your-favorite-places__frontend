@@ -6,6 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import AppHeader from './components/layout/header/AppHeader';
 import AppMain from './components/layout/main/AppMain';
 import AppMenu from './components/layout/menu/AppMenu';
+import AppModal from './components/ui/modal/AppModal';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -35,6 +36,7 @@ setupIonicReact({
 const App: React.FC = () => (
     <IonReactRouter>
         <AppMenu />
+        <AppModal />
 
         <IonApp className="App">
             <AppHeader />

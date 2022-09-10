@@ -8,7 +8,6 @@ import { close } from 'ionicons/icons';
 import { ImagePickerActionTypeE } from '../../../interfaces/image-picker';
 import { imagePickerInitState, imagePickerReducer } from './image-picker-utilities';
 
-import PickedImageModal from './PickedImageModal';
 import InputLabel from '../input-label/InputLabel';
 import InputError from '../input-error/InputError';
 
@@ -107,13 +106,21 @@ const ImagePicker: React.FC<any> = (props) => {
     };
 
     const openPickedImageModelHandler = () => {
-        dispatch(uiActions.openPickedImageModal({ isOpen: true, imgSrc: imgPreviewURL }));
+        dispatch(
+            uiActions.openAppMapModal({
+                isOpen: true,
+                title: '',
+                content: (
+                    <div className={classes['dra-image-picker__image-preview-modal']}>
+                        <IonImg className={classes['img']} src={imgPreviewURL} />
+                    </div>
+                ),
+            })
+        );
     };
 
     return (
         <Fragment>
-            <PickedImageModal />
-
             <input
                 className={classes['dra-image-picker__main-input']}
                 ref={imagePickerRef}

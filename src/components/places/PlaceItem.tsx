@@ -17,6 +17,7 @@ import { PlaceItemI } from '../../interfaces/places';
 import PlaceCardActions from './PlaceCardActions';
 
 import classes from './PlaceItem.module.css';
+import Map from '../map/Map';
 
 const PLaceItem: React.FC<PlaceItemI> = (props) => {
     const history = useHistory();
@@ -26,10 +27,10 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
 
     const openPlaceMapModalHandler = () => {
         dispatch(
-            uiActions.openPlaceMapModal({
+            uiActions.openAppMapModal({
                 isOpen: true,
-                address,
-                location,
+                title: address,
+                content: <Map address={address} location={location} zoom={13} />
             })
         );
     };

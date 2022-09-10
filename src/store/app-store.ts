@@ -1,14 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { AppStoreI } from '../interfaces/store';
 import authSlice from './slices/auth/auth-slice';
 
-import uiSlice from './slices/ui/ui-slice'
+import uiSlice from './slices/ui/ui-slice';
 
-const store = configureStore<AppStoreI>({
+const store = configureStore({
     reducer: {
         ui: uiSlice.reducer,
-        auth: authSlice.reducer
-    }
-})
+        auth: authSlice.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
+});
 
 export default store;

@@ -1,6 +1,5 @@
 import { AuthModeE } from './auth';
-import { PickedImageModalI } from './image-picker';
-import { MapModalI } from './maps';
+import { ModalI } from './modal';
 import { DeletePlaceAlertI } from './places';
 
 export interface AppStoreActionI<T> {
@@ -9,9 +8,8 @@ export interface AppStoreActionI<T> {
 }
 
 export interface UISliceI {
-    placeMapModal: MapModalI;
+    appModal: ModalI;
     placeDeletionAlert: DeletePlaceAlertI;
-    pickedImageModal: PickedImageModalI;
 }
 
 export interface AuthSliceI {
