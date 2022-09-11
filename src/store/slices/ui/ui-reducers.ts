@@ -1,14 +1,14 @@
+import { AlertI } from '../../../interfaces/alert';
 import { LoadingI } from '../../../interfaces/loading';
 import { ModalI } from '../../../interfaces/modal';
 import { NotificationI } from '../../../interfaces/notification';
-import { DeletePlaceAlertI } from '../../../interfaces/places';
 import { AppStoreActionI, UISliceI } from '../../../interfaces/store';
 
 import {
     appLoadingInitialState,
     appModalInitialState,
     appNotificationInitialState,
-    placeDeletionAlertInitialState,
+    appAlertInitialState,
 } from './ui-initial-state';
 
 const uiReducers = {
@@ -30,11 +30,11 @@ const uiReducers = {
     closeAppLoading: (state: UISliceI) => {
         state.appLoading = appLoadingInitialState;
     },
-    openPlaceDeletionAlert: (state: UISliceI, action: AppStoreActionI<DeletePlaceAlertI>) => {
-        state.placeDeletionAlert = action.payload;
+    openAppAlert: (state: UISliceI, action: AppStoreActionI<AlertI>) => {
+        state.appAlert = action.payload;
     },
-    closePlaceDeletionAlert: (state: UISliceI) => {
-        state.placeDeletionAlert = placeDeletionAlertInitialState;
+    closeAppAlert: (state: UISliceI) => {
+        state.appAlert = appAlertInitialState;
     },
 };
 

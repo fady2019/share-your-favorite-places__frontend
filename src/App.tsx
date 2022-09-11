@@ -6,6 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import AppHeader from './components/layout/header/AppHeader';
 import AppMain from './components/layout/main/AppMain';
 import AppMenu from './components/layout/menu/AppMenu';
+import AppAlert from './components/ui/alert/AppAlert';
 import AppModal from './components/ui/modal/AppModal';
 import AppNotification from './components/ui/notification/Notification';
 import AppLoading from './components/ui/loading/Loading';
@@ -38,6 +39,7 @@ setupIonicReact({
 const App: React.FC = () => (
     <IonReactRouter>
         <AppMenu />
+        <AppAlert />
         <AppModal />
         <AppNotification />
         <AppLoading />

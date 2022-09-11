@@ -17,14 +17,16 @@ export const appLoadingInitialState = {
     message: '',
 };
 
-export const placeDeletionAlertInitialState = {
+export const appAlertInitialState = {
     isOpen: false,
-    placeId: '',
+    header: '',
+    message: '',
+    onClose: () => {},
 };
 
 export const uiSliceInitialState: UISliceI = {
     appModal: appModalInitialState,
     appNotification: appNotificationInitialState,
     appLoading: appLoadingInitialState,
-    placeDeletionAlert: placeDeletionAlertInitialState,
+    appAlert: appAlertInitialState,
 };
