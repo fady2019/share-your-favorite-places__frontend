@@ -17,11 +17,6 @@ export interface PlaceItemI {
     placeInfo: PLaceI;
 }
 
-export interface DeletePlaceAlertI {
-    isOpen: boolean;
-    placeId: string;
-}
-
 export interface PlaceListI {
     places: PLaceI[];
 }

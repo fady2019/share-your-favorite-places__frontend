@@ -2,12 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import {
-    IonCardContent,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-} from '@ionic/react';
+import { IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
 
 import { uiActions } from '../../store/slices/ui/ui-slice';
 
@@ -38,11 +33,17 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
         history.push('/places/' + id);
     };
 
+    const closeAlertHandler = (confirmation: boolean) => {
+        console.log(confirmation);
+    };
+
     const OpenPlaceDeletionAlertHandler = () => {
         dispatch(
-            uiActions.openPlaceDeletionAlert({
+            uiActions.openAppAlert({
                 isOpen: true,
-                placeId: id,
+                header: 'Are you sure?',
+                message: 'that you want to delete this place.',
+                onClose: closeAlertHandler,
             })
         );
     };
