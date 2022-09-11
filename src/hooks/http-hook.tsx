@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { uiActions } from '../store/slices/ui/ui-slice';
 
 const useHttp = () => {
+    const dispatch = useDispatch();
+
     const [response, setResponse] = useState<any>(null);
-    const [isFetching, setIsFetch] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
 
     const activeRequests = useRef<AbortController[]>([]);
 
@@ -13,37 +16,57 @@ const useHttp = () => {
         };
     }, []);
 
-    const request = useCallback(async (url: string, opt: RequestInit = {}) => {
-        setIsFetch(true);
+    const request = useCallback(
+        async (url: string, opt: RequestInit = {}) => {
+            dispatch(
+                uiActions.openAppLoading({
+                    isOpen: true,
+                    message: 'waiting for a response',
+                })
+            );
 
-        const reqAbortCtrl = new AbortController();
-        activeRequests.current.push(reqAbortCtrl);
+            const reqAbortCtrl = new AbortController();
+            activeRequests.current.push(reqAbortCtrl);
 
-        try {
-            const fetchedResponse = await fetch(url, { ...opt, signal: reqAbortCtrl.signal });
+            try {
+                const fetchedResponse = await fetch(url, { ...opt, signal: reqAbortCtrl.signal });
 
-            activeRequests.current.filter((ctrl) => ctrl !== reqAbortCtrl);
+                activeRequests.current.filter((ctrl) => ctrl !== reqAbortCtrl);
 
-            const data = await fetchedResponse.json();
+                const data = await fetchedResponse.json();
 
-            if (!fetchedResponse.ok) {
-                throw new Error(data.message);
+                if (!fetchedResponse.ok) {
+                    throw new Error(data.message);
+                }
+
+                setResponse(data);
+
+                const resMsg = data.message || 'fetched successfully!';
+
+                dispatch(
+                    uiActions.openAppNotification({
+                        isOpen: true,
+                        hasError: false,
+                        message: resMsg,
+                    })
+                );
+            } catch (err: any) {
+                const errorMsg = err.message || 'something wrong has been occurred!';
+                dispatch(
+                    uiActions.openAppNotification({
+                        isOpen: true,
+                        hasError: true,
+                        message: errorMsg,
+                    })
+                );
             }
 
-            setResponse(data);
-            setIsFetch(false);
-        } catch (err: any) {
-            setError(err.message || 'something wrong has been occurred!');
-            setIsFetch(false);
-            throw err;
-        }
-    }, []);
+            dispatch(uiActions.closeAppLoading());
+        },
+        [dispatch]
+    );
 
-    const clearError = useCallback(() => {
-        setError('');
-    }, []);
-
-    return { request, response, isFetching, error, clearError };
+    return { request, response };
 };
 
 export default useHttp;
