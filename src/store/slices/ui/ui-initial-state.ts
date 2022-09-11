@@ -6,6 +6,12 @@ export const appModalInitialState = {
     content: '',
 };
 
+export const appNotificationInitialState = {
+    isOpen: false,
+    message: '',
+    hasError: false,
+};
+
 export const placeDeletionAlertInitialState = {
     isOpen: false,
     placeId: '',
@@ -13,5 +19,6 @@ export const placeDeletionAlertInitialState = {
 
 export const uiSliceInitialState: UISliceI = {
     appModal: appModalInitialState,
+    appNotification: appNotificationInitialState,
     placeDeletionAlert: placeDeletionAlertInitialState,
 };

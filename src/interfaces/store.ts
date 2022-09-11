@@ -1,5 +1,6 @@
 import { AuthModeE } from './auth';
 import { ModalI } from './modal';
+import { NotificationI } from './notification';
 import { DeletePlaceAlertI } from './places';
 
 export interface AppStoreActionI<T> {
@@ -9,6 +10,7 @@ export interface AppStoreActionI<T> {
 
 export interface UISliceI {
     appModal: ModalI;
+    appNotification: NotificationI;
     placeDeletionAlert: DeletePlaceAlertI;
 }
 

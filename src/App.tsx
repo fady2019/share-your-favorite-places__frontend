@@ -7,6 +7,7 @@ import AppHeader from './components/layout/header/AppHeader';
 import AppMain from './components/layout/main/AppMain';
 import AppMenu from './components/layout/menu/AppMenu';
 import AppModal from './components/ui/modal/AppModal';
+import AppNotification from './components/ui/notification/Notification';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,6 +38,7 @@ const App: React.FC = () => (
     <IonReactRouter>
         <AppMenu />
         <AppModal />
+        <AppNotification />
 
         <IonApp className="App">
             <AppHeader />
