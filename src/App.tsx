@@ -8,6 +8,7 @@ import AppMain from './components/layout/main/AppMain';
 import AppMenu from './components/layout/menu/AppMenu';
 import AppModal from './components/ui/modal/AppModal';
 import AppNotification from './components/ui/notification/Notification';
+import AppLoading from './components/ui/loading/Loading';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -39,6 +40,7 @@ const App: React.FC = () => (
         <AppMenu />
         <AppModal />
         <AppNotification />
+        <AppLoading />
 
         <IonApp className="App">
             <AppHeader />

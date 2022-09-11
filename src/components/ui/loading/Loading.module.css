@@ -1,0 +1,9 @@
+.dra-app-loading {
+    --backdrop-opacity: 0.7;
+    --background: var(--ion-color-warning);
+    --spinner-color: var(--ion-color-dark);
+}
+
+.dra-app-loading [role='dialog'] {
+    border-radius: 4px;
+}
