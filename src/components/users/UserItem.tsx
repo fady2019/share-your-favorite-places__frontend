@@ -4,7 +4,7 @@ import { IonAvatar, IonLabel, IonBadge } from '@ionic/react';
 
 import { UserItemI } from '../../interfaces/users';
 
-import DraCard from '../ui/card/DraCard';
+import CardItem from '../ui/card-item/CardItem';
 
 import classes from './UserItem.module.css';
 
@@ -14,7 +14,7 @@ const UserItem: React.FC<UserItemI> = (props) => {
     const ionBadgeClasses = `${classes['user-item__places-count']} ion-margin-top`;
 
     return (
-        <DraCard routerLink={`/${id}/places`}>
+        <CardItem routerLink={`/${id}/places`}>
             <IonAvatar className={classes['user-item__avatar']} slot="start">
                 <img src={imgURL} alt={`${name}-avatar`} />
             </IonAvatar>
@@ -25,7 +25,7 @@ const UserItem: React.FC<UserItemI> = (props) => {
                     {placeCount} {placeCount !== 1 ? 'Places' : 'Place'}
                 </IonBadge>
             </IonLabel>
-        </DraCard>
+        </CardItem>
     );
 };
 

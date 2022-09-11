@@ -4,7 +4,7 @@ import { IonGrid } from '@ionic/react';
 
 import UserList from './UserList';
 
-import DraMiniCard from '../ui/card/DraMiniCard';
+import MiniCardItem from '../ui/card-item/MiniCardItem';
 
 import { UsersContainerI } from '../../interfaces/users';
 
@@ -20,9 +20,9 @@ const UsersContainer: React.FC<UsersContainerI> = (props) => {
             )}
 
             {!areUsersFound && (
-                <DraMiniCard>
+                <MiniCardItem>
                     <h2 className="dra-text-bold">There's no users found!</h2>
-                </DraMiniCard>
+                </MiniCardItem>
             )}
         </IonGrid>
     );

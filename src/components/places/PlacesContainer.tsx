@@ -6,7 +6,7 @@ import { IonGrid } from '@ionic/react';
 
 import DeletePlaceAlert from './DeletePlaceAlert';
 import PlaceList from './PlaceList';
-import DraMiniCard from '../ui/card/DraMiniCard';
+import MiniCardItem from '../ui/card-item/MiniCardItem';
 
 import { AppStoreI } from '../../interfaces/store';
 import { PlacesContainerI } from '../../interfaces/places';
@@ -24,9 +24,9 @@ const PlacesContainer: React.FC<PlacesContainerI> = (props) => {
                 {arePlacesFound && <PlaceList places={props.places} />}
 
                 {!arePlacesFound && (
-                    <DraMiniCard>
+                    <MiniCardItem>
                         <h2 className="dra-text-bold">There's no places found!</h2>
-                    </DraMiniCard>
+                    </MiniCardItem>
                 )}
             </IonGrid>
         </Fragment>

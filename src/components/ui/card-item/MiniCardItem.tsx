@@ -2,20 +2,20 @@ import React from 'react';
 
 import { IonCol, IonLabel, IonRow } from '@ionic/react';
 
-import DraCard from './DraCard';
+import CardItem from './CardItem';
 
-const DraMiniCard: React.FC<any> = (props) => {
+const MiniCardItem: React.FC<any> = (props) => {
     return (
         <IonRow>
             <IonCol sizeMd="6" offsetMd="3" sizeLg="4" offsetLg="4">
-                <DraCard>
+                <CardItem>
                     <IonLabel className="ion-text-center">
                         { props.children }
                     </IonLabel>
-                </DraCard>
+                </CardItem>
             </IonCol>
         </IonRow>
     );
 };
 
-export default DraMiniCard;
+export default MiniCardItem;
