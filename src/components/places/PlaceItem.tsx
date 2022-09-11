@@ -3,7 +3,6 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
 import {
-    IonCard,
     IonCardContent,
     IonCardHeader,
     IonCardSubtitle,
@@ -16,7 +15,7 @@ import { PlaceItemI } from '../../interfaces/places';
 
 import PlaceCardActions from './PlaceCardActions';
 
-import classes from './PlaceItem.module.css';
+import Card from '../ui/card/Card';
 import Map from '../map/Map';
 
 const PLaceItem: React.FC<PlaceItemI> = (props) => {
@@ -49,7 +48,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
     };
 
     return (
-        <IonCard className={classes['dra-place-card']}>
+        <Card>
             <img src={imgURL} alt={`${title}-place`} />
 
             <IonCardHeader>
@@ -64,7 +63,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
                 onEditPlace={editPlaceHandler}
                 onOpenPlaceDeletionAlert={OpenPlaceDeletionAlertHandler}
             />
-        </IonCard>
+        </Card>
     );
 };
 
