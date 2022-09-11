@@ -1,4 +1,13 @@
-import React, { ChangeEvent, Fragment, useEffect, useReducer, useRef, useState } from 'react';
+import React, {
+    ChangeEvent,
+    forwardRef,
+    Fragment,
+    useEffect,
+    useImperativeHandle,
+    useReducer,
+    useRef,
+    useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { uiActions } from '../../../store/slices/ui/ui-slice';
 
@@ -20,14 +29,17 @@ const getAttributes = (props: any) => {
     delete attributes?.type;
     delete attributes?.value;
     delete attributes?.valid;
+    delete attributes?.hidden;
     delete attributes?.onChange;
     delete attributes?.onGetFile;
 
     return attributes;
 };
 
-const ImagePicker: React.FC<any> = (props) => {
-    const initialIsValid = props.valid;
+const ImagePicker: React.FC<any> = forwardRef((props, ref) => {
+    const isHidden = !!props.hidden;
+    
+    const initialIsValid = !!props.valid;
     const initialPreviewURL = props.value; // props.value is the src of file
 
     const dispatch = useDispatch();
@@ -76,6 +88,12 @@ const ImagePicker: React.FC<any> = (props) => {
             setImgPreview(initialPreviewURL);
         }
     }, [imageFile, initialPreviewURL]);
+
+    useImperativeHandle(ref, () => {
+        return {
+            click: () => imagePickerRef.current?.click(),
+        };
+    });
 
     const openFileExplorerHandler = () => {
         imagePickerDispatch({
@@ -130,50 +148,52 @@ const ImagePicker: React.FC<any> = (props) => {
                 {...filePickerAttributes}
             />
 
-            <IonItem className={classes['dra-image-picker']} lines="none">
-                {imgPreviewURL && (
-                    <IonThumbnail
-                        className={classes['dra-image-picker__image-preview']}
-                        slot="end"
-                        onClick={openPickedImageModelHandler}
-                    >
-                        <IonImg src={imgPreviewURL} />
-                    </IonThumbnail>
-                )}
+            {!isHidden && (
+                <IonItem className={classes['dra-image-picker']} lines="none">
+                    {imgPreviewURL && (
+                        <IonThumbnail
+                            className={classes['dra-image-picker__image-preview']}
+                            slot="end"
+                            onClick={openPickedImageModelHandler}
+                        >
+                            <IonImg src={imgPreviewURL} />
+                        </IonThumbnail>
+                    )}
 
-                <InputLabel
-                    label={props.label}
-                    isInvalid={isInvalid}
-                    stacked={!!fileName}
-                    onClick={openFileExplorerHandler}
-                />
-
-                <div className={filePickerClassName}>
-                    <span
-                        role={'button'}
-                        className={classes['file-name']}
-                        tabIndex={0}
+                    <InputLabel
+                        label={props.label}
+                        isInvalid={isInvalid}
+                        stacked={!!fileName}
                         onClick={openFileExplorerHandler}
-                    >
-                        {fileName}
-                    </span>
+                    />
 
-                    {showClearBtn && (
+                    <div className={filePickerClassName}>
                         <span
                             role={'button'}
-                            className={classes['clear-btn']}
-                            tabIndex={1}
-                            onClick={clearFileHandler}
+                            className={classes['file-name']}
+                            tabIndex={0}
+                            onClick={openFileExplorerHandler}
                         >
-                            <IonIcon icon={close} size="large" />
+                            {fileName}
                         </span>
-                    )}
-                </div>
 
-                <InputError show={isInvalid} error={imagePickerState.error} />
-            </IonItem>
+                        {showClearBtn && (
+                            <span
+                                role={'button'}
+                                className={classes['clear-btn']}
+                                tabIndex={1}
+                                onClick={clearFileHandler}
+                            >
+                                <IonIcon icon={close} size="large" />
+                            </span>
+                        )}
+                    </div>
+
+                    <InputError show={isInvalid} error={imagePickerState.error} />
+                </IonItem>
+            )}
         </Fragment>
     );
-};
+});
 
 export default ImagePicker;
