@@ -19,7 +19,7 @@ const AppModal: React.FC<any> = () => {
     };
 
     return (
-        <IonModal isOpen={isOpen}>
+        <IonModal isOpen={isOpen} onIonModalWillDismiss={closeMapModal}>
             <IonHeader>
                 <IonToolbar color="warning">
                     <IonButton slot="start" fill="clear" color="dark" onClick={closeMapModal}>
