@@ -12,8 +12,7 @@ export interface AuthFormI {
 }
 
 export interface AuthFormStateInputI {
-    firstName?: FormInputI;
-    lastName?: FormInputI;
+    name?: FormInputI;
     email: FormInputI;
     password: FormInputI;
 }

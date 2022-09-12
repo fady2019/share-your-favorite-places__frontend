@@ -6,15 +6,13 @@ export const formInitialState = (authMode: AuthModeE): FormStateI<AuthFormStateI
         inputs: {
             email: { value: '', valid: false },
             password: { value: '', valid: false },
-            firstName: { value: '', valid: false },
-            lastName: { value: '', valid: false },
+            name: { value: '', valid: false },
         },
         valid: false,
     };
 
     if (authMode === AuthModeE.LOGIN) {
-        delete formState.inputs.firstName;
-        delete formState.inputs.lastName;
+        delete formState.inputs.name;
     }
     
     return formState;

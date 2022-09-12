@@ -1,4 +1,4 @@
-import React, { FormEvent, Fragment } from 'react';
+import React, { FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -11,11 +11,7 @@ import { formInitialState } from './auth-form-utilities';
 
 import { AuthFormI, AuthFormStateInputI, AuthModeE } from '../../interfaces/auth';
 
-import {
-    VALIDATOR_REQUIRE,
-    VALIDATOR_EMAIL,
-    VALIDATOR_MIN_LENGTH,
-} from '../../utilities/validators';
+import { VALIDATOR_REQUIRE, VALIDATOR_EMAIL, VALIDATOR_MIN_LENGTH } from '../../utilities/validators';
 
 import FormInput from '../ui/input/Input';
 import FormActions from '../shared/FormActions';
@@ -50,8 +46,7 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
 
         // if the current mode is sign up then we will switch to login mode
         if (authMode === AuthModeE.SIGN_UP) {
-            delete newState.inputs.firstName;
-            delete newState.inputs.lastName;
+            delete newState.inputs.name;
             newState.valid = newState.inputs.email.valid && newState.inputs.password.valid;
         }
 
@@ -66,25 +61,14 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
     return (
         <form onSubmit={submitFormHandler}>
             {authMode === AuthModeE.SIGN_UP && (
-                <Fragment>
-                    <FormInput
-                        id="firstName"
-                        name="firstName"
-                        type="text"
-                        label="First Name"
-                        validators={[VALIDATOR_REQUIRE('First name is required, please enter it!')]}
-                        onGetInput={getInputHandler}
-                    />
-
-                    <FormInput
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        label="Last Name"
-                        validators={[VALIDATOR_REQUIRE('Last name is required, please enter it!')]}
-                        onGetInput={getInputHandler}
-                    />
-                </Fragment>
+                <FormInput
+                    id="name"
+                    name="name"
+                    type="text"
+                    label="Name"
+                    validators={[VALIDATOR_REQUIRE('Name is required, please enter it!')]}
+                    onGetInput={getInputHandler}
+                />
             )}
 
             <FormInput
@@ -97,19 +81,15 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
                     VALIDATOR_EMAIL('Email is invalid, please enter valid one!'),
                 ]}
                 onGetInput={getInputHandler}
-                focus
             />
 
             <FormInput
                 id="password"
                 name="password"
                 type="password"
-                label="password"
+                label="Password"
                 validators={[
-                    VALIDATOR_MIN_LENGTH(
-                        8,
-                        'Password is too short, please enter at least 8 characters!'
-                    ),
+                    VALIDATOR_MIN_LENGTH(8, 'Password is too short, please enter at least 8 characters!'),
                 ]}
                 onGetInput={getInputHandler}
             />
