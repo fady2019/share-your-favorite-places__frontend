@@ -1,5 +1,5 @@
 .dra-card {
     border-radius: 4px;
     padding-bottom: 70px;
-    box-shadow: 0px 0px 12px -6px var(--ion-color-light);
+    box-shadow: 3px 3px 45px -16px var(--ion-color-medium);
 }
