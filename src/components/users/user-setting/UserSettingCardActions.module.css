@@ -1,0 +1,7 @@
+.dra-card-actions__btn--delete-account {
+    background-color: var(--ion-color-danger);
+}
+
+.dra-card-actions__btn--logout {
+    background-color: var(--ion-color-warning);
+}

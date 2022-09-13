@@ -1,0 +1,12 @@
+.dra-user-avatar-container {
+    display: flex;
+    justify-content: center;
+    padding: 24px 16px;
+}
+
+.dra-user-avatar-container__avatar {
+    width: 140px;
+    height: 140px;
+    box-shadow: 3px 3px 45px -16px var(--ion-color-dark);
+    cursor: pointer;
+}
