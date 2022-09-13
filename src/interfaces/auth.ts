@@ -1,11 +1,14 @@
 import { FormInputI } from './forms';
 
 export enum AuthModeE {
-    LOGIN,
-    SIGN_UP,
+    LOGIN='login',
+    SIGN_UP='signup',
 }
 
-export interface AuthFormContainerI {}
+export interface AuthTokenI {
+    id: string;
+    expireAt: number;
+}
 
 export interface AuthFormI {
     mode: AuthModeE;

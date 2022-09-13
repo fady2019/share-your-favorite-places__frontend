@@ -1,4 +1,4 @@
-import { AuthModeE } from './auth';
+import { AuthModeE, AuthTokenI } from './auth';
 
 import { AlertI } from './alert';
 import { LoadingI } from './loading';
@@ -19,7 +19,7 @@ export interface UISliceI {
 
 export interface AuthSliceI {
     authMode: AuthModeE;
-    isAuth: boolean;
+    token: AuthTokenI | null;
 }
 
 export interface AppStoreI {
