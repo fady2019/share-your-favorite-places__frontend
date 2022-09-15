@@ -66,6 +66,10 @@ const refreshToken = (token: AuthTokenI, isAutoLogin: boolean = false): any => {
 };
 
 export const login = (response: any): any => {
+    if (TOKEN_REFRESH_TIMEOUT) {
+        clearTimeout(TOKEN_REFRESH_TIMEOUT);
+    }
+
     return (dispatch: Dispatch<AnyAction>) => {
         dispatch(authActions.setToken(response.token));
         dispatch(userActions.setUserInfo(response.user));
