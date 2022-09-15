@@ -1,9 +1,10 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { useForm } from '../../hooks/form-hook';
-import { authActions } from '../../store/slices/auth/auth-slice';
+import useHttp from '../../hooks/http-hook';
+import { authActions, login } from '../../store/slices/auth/auth-slice';
 
 import { IonButton } from '@ionic/react';
 
@@ -23,18 +24,41 @@ const AuthForm: React.FC<AuthFormI> = (props) => {
 
     const { mode: authMode } = props;
 
+    const { request, response } = useHttp();
+
     const { formState, formDispatch, getInputHandler } = useForm<AuthFormStateInputI>(
         formInitialState(authMode)
     );
 
     const isFormValid = formState.valid;
 
+    useEffect(() => {
+        if (response) {
+            dispatch(login(response))
+            history.replace('/');
+        }
+    }, [response, dispatch, history]);
+
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
+
     const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (isFormValid) {
-            dispatch(authActions.login());
-            history.replace('/');
+            const userCredential: any = {};
+
+            const formInputs: any = formState.inputs;
+            for (const input in formInputs) {
+                userCredential[input] = formInputs[input].value;
+            }
+
+            const reqURL = `${backendURL}/users/${authMode}`;
+
+            request(reqURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userCredential),
+            });
         }
     };
 
