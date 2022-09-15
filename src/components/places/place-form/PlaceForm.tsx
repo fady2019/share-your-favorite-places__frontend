@@ -1,8 +1,11 @@
 import React, { FormEvent } from 'react';
+import { useSelector } from 'react-redux';
 
 import { IonButton } from '@ionic/react';
 
+import useHttp from '../../../hooks/http-hook';
 import { useForm } from '../../../hooks/form-hook';
+import { AppStoreI } from '../../../interfaces/store';
 import { placeFormInitialState } from './place-form-utilities';
 
 import { PlaceFormI, PlaceFormStateInputsI, PlaceFormTypeE } from '../../../interfaces/places';
@@ -14,17 +17,36 @@ import FormInput from '../../ui/input/Input';
 import FormActions from '../../shared/FormActions';
 
 const PlaceForm: React.FC<PlaceFormI> = (props) => {
+    const token = useSelector((state: AppStoreI) => state.auth.token);
+
     const { formState, getInputHandler } = useForm<PlaceFormStateInputsI>(placeFormInitialState);
 
-    const { formType, address, description, title, imgURL } = props;
+    const { formType, address, description, title, imgURL, id } = props;
 
     const isFormValid = formState.valid;
+
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
+    const { request } = useHttp();
 
     const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (isFormValid) {
-            console.log(formState);
+            const reqURL = `${backendURL}/places/${formType === PlaceFormTypeE.NEW_PLACE_FORM ? 'new' : id}`;
+
+            const reqBody = new FormData();
+            reqBody.append('title', formState.inputs.title.value);
+            reqBody.append('address', formState.inputs.address.value);
+            reqBody.append('image', formState.inputs.image.value);
+            reqBody.append('description', formState.inputs.description.value);
+
+            request(reqURL, {
+                method: formType === PlaceFormTypeE.NEW_PLACE_FORM ? 'POST' : 'PATCH',
+                headers: {
+                    authorization: `Bearer ${token?.id}`,
+                },
+                body: reqBody,
+            });
         }
     };
 
@@ -52,14 +74,14 @@ const PlaceForm: React.FC<PlaceFormI> = (props) => {
                 onGetInput={getInputHandler}
             />
 
-            <ImagePicker 
+            <ImagePicker
                 id="image"
                 name="image"
-                label="Image" 
+                label="Image"
                 value={imgURL || ''}
                 valid={formType === PlaceFormTypeE.UPDATE_PLACE_FORM}
-                accept="image/png, image/jpeg, image/jpg" 
-                multiple={false} 
+                accept="image/png, image/jpeg, image/jpg"
+                multiple={false}
                 onGetFile={getInputHandler}
             />
 
