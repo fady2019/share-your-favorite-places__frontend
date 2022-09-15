@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { IonText } from '@ionic/react';
 
 import { AppStoreI } from '../../interfaces/store';
-import { AuthFormContainerI, AuthModeE } from '../../interfaces/auth';
+import { AuthModeE } from '../../interfaces/auth';
 
 import FormContainer from '../shared/FormContainer';
 import AuthForm from './AuthForm';
 
-const AuthFormContainer: React.FC<AuthFormContainerI> = (props) => {
+const AuthFormContainer: React.FC<any> = () => {
     const authMode = useSelector((state: AppStoreI) => state.auth.authMode);
 
     return (
