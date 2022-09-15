@@ -15,7 +15,7 @@ const UserPersonalInfo: React.FC<any> = () => {
 
     const changeNameHandler = () => {
         dispatch(
-            uiActions.openAppMapModal({
+            uiActions.openAppModal({
                 isOpen: true,
                 title: 'Change Name',
                 content: <UserSettingChangeNameForm />,

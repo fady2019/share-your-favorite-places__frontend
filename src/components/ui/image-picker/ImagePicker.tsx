@@ -125,7 +125,7 @@ const ImagePicker: React.FC<any> = forwardRef((props, ref) => {
 
     const openPickedImageModelHandler = () => {
         dispatch(
-            uiActions.openAppMapModal({
+            uiActions.openAppModal({
                 isOpen: true,
                 title: '',
                 content: (

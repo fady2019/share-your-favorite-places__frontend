@@ -21,7 +21,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
 
     const openPlaceMapModalHandler = () => {
         dispatch(
-            uiActions.openAppMapModal({
+            uiActions.openAppModal({
                 isOpen: true,
                 title: address,
                 content: <Map address={address} location={location} zoom={13} />

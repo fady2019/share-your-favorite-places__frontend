@@ -19,7 +19,7 @@ const UserSettingCardActions: React.FC<any> = () => {
 
     const openAccountDeletionAlertHandler = () => {
         dispatch(
-            uiActions.openAppMapModal({
+            uiActions.openAppModal({
                 isOpen: true,
                 title: 'Confirm Password',
                 content: <UserSettingPasswordConfirmationForm />,

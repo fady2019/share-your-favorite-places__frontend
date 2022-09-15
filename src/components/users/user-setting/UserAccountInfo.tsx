@@ -17,7 +17,7 @@ const UserAccountInfo: React.FC<any> = () => {
 
     const changeEmailHandler = () => {
         dispatch(
-            uiActions.openAppMapModal({
+            uiActions.openAppModal({
                 isOpen: true,
                 title: 'Change Email',
                 content: <UserSettingChangeEmailForm />,
@@ -27,7 +27,7 @@ const UserAccountInfo: React.FC<any> = () => {
 
     const changePasswordHandler = () => {
         dispatch(
-            uiActions.openAppMapModal({
+            uiActions.openAppModal({
                 isOpen: true,
                 title: 'Change Password',
                 content: <UserSettingChangePasswordForm />,

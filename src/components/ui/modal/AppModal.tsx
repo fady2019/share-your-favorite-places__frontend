@@ -15,7 +15,7 @@ const AppModal: React.FC<any> = () => {
     const { isOpen, title, content } = useSelector((state: AppStoreI) => state.ui.appModal);
 
     const closeMapModal = () => {
-        dispatch(uiActions.closeAppMapModal());
+        dispatch(uiActions.closeAppModal());
     };
 
     return (

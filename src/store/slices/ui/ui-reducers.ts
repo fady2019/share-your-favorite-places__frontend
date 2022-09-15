@@ -12,10 +12,10 @@ import {
 } from './ui-initial-state';
 
 const uiReducers = {
-    openAppMapModal: (state: UISliceI, action: AppStoreActionI<ModalI>) => {
+    openAppModal: (state: UISliceI, action: AppStoreActionI<ModalI>) => {
         state.appModal = action.payload;
     },
-    closeAppMapModal: (state: UISliceI) => {
+    closeAppModal: (state: UISliceI) => {
         state.appModal = appModalInitialState;
     },
     openAppNotification: (state: UISliceI, action: AppStoreActionI<NotificationI>) => {
