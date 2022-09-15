@@ -27,7 +27,7 @@ const getItem = (key: string) => {
 };
 
 const removeItem = (key: string) => {
-    document.cookie = `${key}=; max-age=0`;
+    document.cookie = `${key}=; path=/; max-age=0`;
 };
 
 const cookieAPI = { setItem, getItem, removeItem };
