@@ -19,7 +19,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const { id, title, description, imgURL, address, location } = props.placeInfo;
+    const { id, title, description, imgURL, address, location, creator } = props.placeInfo;
 
     const openPlaceImageModalHandler = () => {
         dispatch(
@@ -81,6 +81,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
             <IonCardContent>{description}</IonCardContent>
 
             <PlaceCardActions
+                creator={creator}
                 onOpenPlaceMapModal={openPlaceMapModalHandler}
                 onEditPlace={editPlaceHandler}
                 onOpenPlaceDeletionAlert={OpenPlaceDeletionAlertHandler}
