@@ -5,7 +5,7 @@ import { pencil, person, key, calendar } from 'ionicons/icons';
 
 import { uiActions } from '../../../store/slices/ui/ui-slice';
 
-import UserSettingChangeEmailForm from './UserSettingChangeEmail';
+import UserSettingChangeEmailForm from './UserSettingChangeEmailForm';
 import SlidingItemGroup from '../../ui/sliding-item-group/SlidingItemGroup';
 import UserSettingChangePasswordForm from './UserSettingChangePasswordForm';
 import { AppStoreI } from '../../../interfaces/store';
