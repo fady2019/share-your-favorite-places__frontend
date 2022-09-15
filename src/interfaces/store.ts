@@ -21,6 +21,7 @@ export interface UISliceI {
 export interface AuthSliceI {
     authMode: AuthModeE;
     token: AuthTokenI | null;
+    isAutoLoginDone: boolean;
 }
 
 export interface UserSliceI {
