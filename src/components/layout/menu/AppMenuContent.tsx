@@ -9,7 +9,7 @@ import { AppStoreI } from '../../../interfaces/store';
 
 import DraScrollbar from '../../ui/scrollbar/DraScrollbar';
 
-const MENU_ITEMS = [
+const MENU_ITEMS = (userId: string) => [
     {
         id: 'USER_MENU_ITEM',
         label: 'All Users',
@@ -19,7 +19,7 @@ const MENU_ITEMS = [
     {
         id: 'PLACES_MENU_ITEM',
         label: 'My Places',
-        to: '/u1/places',
+        to: `/${userId}/places`,
         needAuth: true,
     },
     {
@@ -33,6 +33,7 @@ const MENU_ITEMS = [
 const AppMenuContent: React.FC<any> = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const userId = useSelector((state: AppStoreI) => state.user.userInfo?.id) || '';
     const authToken = useSelector((state: AppStoreI) => state.auth.token);
     const isAuth = !!authToken && !!authToken.id;
 
@@ -52,7 +53,7 @@ const AppMenuContent: React.FC<any> = (props) => {
         <IonContent color="dark">
             <DraScrollbar>
                 <IonList>
-                    {MENU_ITEMS.map((menuItem) => {
+                    {MENU_ITEMS(userId).map((menuItem) => {
                         if (menuItem.needAuth && !isAuth) {
                             return null;
                         }
