@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IonApp, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+
+import { AppStoreI } from './interfaces/store';
+import { autoLogin } from './store/slices/auth/auth-slice';
 
 import AppHeader from './components/layout/header/AppHeader';
 import AppMain from './components/layout/main/AppMain';
@@ -36,20 +40,42 @@ setupIonicReact({
     mode: 'ios',
 });
 
-const App: React.FC = () => (
-    <IonReactRouter>
-        <AppMenu />
-        <AppAlert />
-        <AppModal />
-        <AppNotification />
-        <AppLoading />
+let initURL: string;
 
-        <IonApp className="App">
-            <AppHeader />
+const App: React.FC = () => {
+    const isAutoLoginDone = useSelector((state: AppStoreI) => state.auth.isAutoLoginDone);
 
-            <AppMain />
-        </IonApp>
-    </IonReactRouter>
-);
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    if (!initURL) {
+        initURL = history.location.pathname;
+    }
+
+    useEffect(() => {
+        if (isAutoLoginDone) {
+            history.replace(initURL);
+        }
+    }, [isAutoLoginDone, history]);
+
+    useEffect(() => {
+        dispatch(autoLogin());
+    }, [dispatch]);
+
+    return (
+        <Fragment>
+            {isAutoLoginDone && <AppMenu />}
+            <AppAlert />
+            <AppModal />
+            <AppNotification />
+            <AppLoading />
+
+            <IonApp className="App">
+                <AppHeader />
+                {isAutoLoginDone && <AppMain />}
+            </IonApp>
+        </Fragment>
+    );
+};
 
 export default App;
