@@ -10,12 +10,12 @@ import classes from './AppMenuHeader.module.css';
 
 import defaultAvatar from '../../../assets/icons/default-avatar.svg';
 
-const DUMMY_USER_IMAGE =
-    'https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
-const DUMMY_USER_NAME = 'Fady Emad';
-
 const AppMenuHeader: React.FC<any> = (props) => {
-    const isAuth = useSelector((state: AppStoreI) => state.auth.isAuth);
+    const authToken = useSelector((state: AppStoreI) => state.auth.token);
+    const username = useSelector((state: AppStoreI) => state.user.userInfo?.name);
+    const imgURL = useSelector((state: AppStoreI) => state.user.userInfo?.imgURL);
+    
+    const isAuth = !!authToken && !!authToken.id
 
     const { onCloseMenu } = props;
 
@@ -24,15 +24,13 @@ const AppMenuHeader: React.FC<any> = (props) => {
             <IonToolbar color="warning">
                 <Link
                     className={classes['dra-app-menu__header-link']}
-                    to="/auth"
+                    to={isAuth ? '/user/setting' : '/auth'}
                     onClick={onCloseMenu}
                 >
-                    <IonTitle className="ion-text-start">
-                        {isAuth ? DUMMY_USER_NAME : 'Join Us'}
-                    </IonTitle>
+                    <IonTitle className="ion-text-start">{isAuth ? username : 'Join Us'}</IonTitle>
 
                     <IonAvatar className={classes['dra-app-menu__user-avatar']} slot="start">
-                        <img src={isAuth ? DUMMY_USER_IMAGE : defaultAvatar} alt="user-avatar" />
+                        <img src={isAuth ? imgURL : defaultAvatar} alt="user-avatar" />
                     </IonAvatar>
                 </Link>
             </IonToolbar>
