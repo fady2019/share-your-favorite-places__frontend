@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { personRemove, logOut } from 'ionicons/icons';
 
 import { uiActions } from '../../../store/slices/ui/ui-slice';
-import { authActions } from '../../../store/slices/auth/auth-slice';
+import { logout } from '../../../store/slices/auth/auth-slice';
 
 import CardActionBtn from '../../ui/card/CardActionBtn';
 import CardActions from '../../ui/card/CardActions';
@@ -22,13 +22,13 @@ const UserSettingCardActions: React.FC<any> = () => {
             uiActions.openAppMapModal({
                 isOpen: true,
                 title: 'Confirm Password',
-                content: <UserSettingPasswordConfirmationForm />
+                content: <UserSettingPasswordConfirmationForm />,
             })
         );
     };
 
     const logoutHandler = () => {
-        dispatch(authActions.logout());
+        dispatch(logout());
         history.replace('/');
     };
 
