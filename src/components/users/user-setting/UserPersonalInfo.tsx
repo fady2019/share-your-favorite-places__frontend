@@ -1,14 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { pencil, codeSlash } from 'ionicons/icons';
 
+import { AppStoreI } from '../../../interfaces/store';
 import { uiActions } from '../../../store/slices/ui/ui-slice';
 
 import UserSettingChangeNameForm from './UserSettingChangeNameForm';
 import SlidingItemGroup from '../../ui/sliding-item-group/SlidingItemGroup';
 
 const UserPersonalInfo: React.FC<any> = () => {
+    const username = useSelector((state: AppStoreI) => state.user.userInfo?.name) || 'user name';
     const dispatch = useDispatch();
 
     const changeNameHandler = () => {
@@ -27,7 +29,7 @@ const UserPersonalInfo: React.FC<any> = () => {
             icon: codeSlash,
             label: {
                 property: 'Name',
-                value: 'Fady Emad',
+                value: username,
             },
             options: [
                 {

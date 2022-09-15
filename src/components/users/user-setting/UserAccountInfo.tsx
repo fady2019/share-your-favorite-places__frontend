@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { pencil, person, key, calendar } from 'ionicons/icons';
 
@@ -8,8 +8,11 @@ import { uiActions } from '../../../store/slices/ui/ui-slice';
 import UserSettingChangeEmailForm from './UserSettingChangeEmail';
 import SlidingItemGroup from '../../ui/sliding-item-group/SlidingItemGroup';
 import UserSettingChangePasswordForm from './UserSettingChangePasswordForm';
+import { AppStoreI } from '../../../interfaces/store';
 
 const UserAccountInfo: React.FC<any> = () => {
+    const userEmail = useSelector((state: AppStoreI) => state.user.userInfo?.email) || 'user email';
+    const createdAt = useSelector((state: AppStoreI) => state.user.userInfo?.createdAt) || 'creation date';
     const dispatch = useDispatch();
 
     const changeEmailHandler = () => {
@@ -38,7 +41,7 @@ const UserAccountInfo: React.FC<any> = () => {
             icon: person,
             label: {
                 property: 'Email',
-                value: 'fady@test.com',
+                value: userEmail,
             },
             options: [
                 {
@@ -68,7 +71,7 @@ const UserAccountInfo: React.FC<any> = () => {
             icon: calendar,
             label: {
                 property: 'Creation Date',
-                value: 'Sep 30, 2022',
+                value: new Date(createdAt).toLocaleDateString(undefined, { dateStyle: 'long' }),
             },
         },
     ];

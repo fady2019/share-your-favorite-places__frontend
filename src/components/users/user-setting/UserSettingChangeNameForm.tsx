@@ -1,7 +1,9 @@
 import React, { FormEvent } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useForm } from '../../../hooks/form-hook';
 import { ChangeNameFormI } from '../../../interfaces/user-setting';
+import { AppStoreI } from '../../../interfaces/store';
 import { VALIDATOR_REQUIRE } from '../../../utilities/validators';
 import UserSettingForm from './UserSettingForm';
 import FormInput from '../../ui/input/Input';
@@ -19,7 +21,7 @@ const formInitState = (initName: string = '') => {
 };
 
 const UserSettingChangeNameForm: React.FC<any> = () => {
-    const initName = 'Fady Emad';
+    const initName = useSelector((state: AppStoreI) => state.user.userInfo?.name) || 'user name';
 
     const { formState, getInputHandler } = useForm<ChangeNameFormI>(formInitState(initName));
 
