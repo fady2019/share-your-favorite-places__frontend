@@ -12,7 +12,7 @@ const PlacesContainer: React.FC<PlacesContainerI> = (props) => {
 
     return (
         <IonGrid className="ion-padding">
-            {arePlacesFound && <PlaceList places={props.places} />}
+            {arePlacesFound && <PlaceList places={props.places} onDelete={props.onDelete} />}
 
             {!arePlacesFound && (
                 <MiniCardItem>

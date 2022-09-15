@@ -15,14 +15,17 @@ export interface PLaceI {
 
 export interface PlaceItemI {
     placeInfo: PLaceI;
+    onDelete: (placeId: string) => any;
 }
 
 export interface PlaceListI {
     places: PLaceI[];
+    onDelete: (placeId: string) => any;
 }
 
 export interface PlacesContainerI {
     places: PLaceI[];
+    onDelete: (placeId: string) => any;
 }
 
 export enum PlaceFormTypeE {

@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 const UserPlaces: React.FC<any> = () => {
     const { request, response } = useHttp();
 
+    const token = useSelector((state: AppStoreI) => state.auth.token);
     const isLoading = useSelector((state: AppStoreI) => state.ui.appLoading.isOpen);
 
     const [places, setPlaces] = useState<PLaceI[]>([]);
@@ -21,8 +22,16 @@ const UserPlaces: React.FC<any> = () => {
     const backendURL = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
-        if (response) {
+        if (!response) {
+            return;
+        }
+
+        if (response.places) {
             setPlaces(response.places);
+        }
+
+        if (response.placeId) {
+            setPlaces((crtPlaces) => crtPlaces.filter((place) => place.id !== response.placeId));
         }
     }, [response]);
 
@@ -31,7 +40,18 @@ const UserPlaces: React.FC<any> = () => {
         request(reqURL);
     }, [request, backendURL, userId]);
 
-    return <>{!isLoading && <PlacesContainer places={places} />}</>;
+    const deletePlaceHandler = (placeId: string) => {
+        const reqURL = `${backendURL}/places/${placeId}`;
+
+        request(reqURL, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${token?.id}`,
+            },
+        });
+    };
+
+    return <>{!isLoading && <PlacesContainer places={places} onDelete={deletePlaceHandler} />}</>;
 };
 
 export default UserPlaces;

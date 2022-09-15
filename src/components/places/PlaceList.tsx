@@ -2,9 +2,9 @@ import React from 'react';
 
 import { IonCol, IonRow } from '@ionic/react';
 
-import PLaceItem from './PlaceItem';
-
 import { PlaceListI } from '../../interfaces/places';
+
+import PLaceItem from './PlaceItem';
 
 const PlaceList: React.FC<PlaceListI> = (props) => {
     const { places } = props;
@@ -23,7 +23,7 @@ const PlaceList: React.FC<PlaceListI> = (props) => {
                         sizeLg="4"
                         offsetLg="1.25"
                     >
-                        <PLaceItem placeInfo={placeInfo} />
+                        <PLaceItem placeInfo={placeInfo} onDelete={props.onDelete} />
                     </IonCol>
                 );
             })}

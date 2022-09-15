@@ -50,7 +50,9 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
     };
 
     const closeAlertHandler = (confirmation: boolean) => {
-        console.log(confirmation);
+        if (confirmation) {
+            props.onDelete(id);
+        }
     };
 
     const OpenPlaceDeletionAlertHandler = () => {
