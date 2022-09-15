@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { IonButton, IonContent, IonItem, IonLabel, IonList } from '@ionic/react';
 
-import { authActions } from '../../../store/slices/auth/auth-slice';
+import { logout } from '../../../store/slices/auth/auth-slice';
 import { AppStoreI } from '../../../interfaces/store';
 
 import DraScrollbar from '../../ui/scrollbar/DraScrollbar';
@@ -33,7 +33,8 @@ const MENU_ITEMS = [
 const AppMenuContent: React.FC<any> = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const isAuth = useSelector((state: AppStoreI) => state.auth.isAuth);
+    const authToken = useSelector((state: AppStoreI) => state.auth.token);
+    const isAuth = !!authToken && !!authToken.id;
 
     const { onCloseMenu } = props;
 
@@ -43,7 +44,7 @@ const AppMenuContent: React.FC<any> = (props) => {
     };
 
     const logoutHandler = () => {
-        dispatch(authActions.logout());
+        dispatch(logout());
         navigationHandler('/');
     };
 
@@ -84,13 +85,7 @@ const AppMenuContent: React.FC<any> = (props) => {
                     </IonButton>
                 )}
 
-                <IonButton
-                    className="ion-margin"
-                    expand="block"
-                    strong
-                    color="warning"
-                    onClick={onCloseMenu}
-                >
+                <IonButton className="ion-margin" expand="block" strong color="warning" onClick={onCloseMenu}>
                     Close
                 </IonButton>
             </DraScrollbar>
