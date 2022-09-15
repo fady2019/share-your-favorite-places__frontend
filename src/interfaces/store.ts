@@ -4,6 +4,7 @@ import { AlertI } from './alert';
 import { LoadingI } from './loading';
 import { ModalI } from './modal';
 import { NotificationI } from './notification';
+import { UserInfoI } from './users';
 
 export interface AppStoreActionI<T> {
     type: string;
@@ -22,7 +23,12 @@ export interface AuthSliceI {
     token: AuthTokenI | null;
 }
 
+export interface UserSliceI {
+    userInfo: UserInfoI | null;
+}
+
 export interface AppStoreI {
     ui: UISliceI;
     auth: AuthSliceI;
+    user: UserSliceI;
 }

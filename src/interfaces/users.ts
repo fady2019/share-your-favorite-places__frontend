@@ -1,3 +1,12 @@
+export interface UserInfoI {
+    id: string;
+    name: string;
+    email: string;
+    imgURL: string;
+    createdAt: string;
+    [key: string]: any;
+}
+
 export interface UserI {
     id: string;
     name: string;
