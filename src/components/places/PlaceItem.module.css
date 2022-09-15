@@ -1,0 +1,16 @@
+.dra-place-card__place-image-modal {
+    background-color: var(--ion-color-dark);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dra-place-card__place-image-modal > .img {
+    height: 100%;
+}
+
+.dra-place-card__place-image {
+    width: 100%;
+    cursor: pointer;
+}

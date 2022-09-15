@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import { IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
+import { IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg } from '@ionic/react';
 
 import { uiActions } from '../../store/slices/ui/ui-slice';
 
@@ -13,18 +13,34 @@ import PlaceCardActions from './PlaceCardActions';
 import Card from '../ui/card/Card';
 import Map from '../map/Map';
 
+import classes from './PlaceItem.module.css';
+
 const PLaceItem: React.FC<PlaceItemI> = (props) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
     const { id, title, description, imgURL, address, location } = props.placeInfo;
 
+    const openPlaceImageModalHandler = () => {
+        dispatch(
+            uiActions.openAppModal({
+                isOpen: true,
+                title: title,
+                content: (
+                    <div className={classes['dra-place-card__place-image-modal']}>
+                        <IonImg className={classes['img']} src={imgURL} />
+                    </div>
+                ),
+            })
+        );
+    };
+
     const openPlaceMapModalHandler = () => {
         dispatch(
             uiActions.openAppModal({
                 isOpen: true,
                 title: address,
-                content: <Map address={address} location={location} zoom={13} />
+                content: <Map address={address} location={location} zoom={13} />,
             })
         );
     };
@@ -50,7 +66,12 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
 
     return (
         <Card>
-            <img src={imgURL} alt={`${title}-place`} />
+            <img
+                className={classes['dra-place-card__place-image']}
+                src={imgURL}
+                alt={`${title}-place`}
+                onClick={openPlaceImageModalHandler}
+            />
 
             <IonCardHeader>
                 <IonCardSubtitle>{address}</IonCardSubtitle>
