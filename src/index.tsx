@@ -1,4 +1,5 @@
 import React from 'react';
+import { IonReactRouter } from '@ionic/react-router';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -10,9 +11,11 @@ import store from './store/app-store';
 import 'leaflet/dist/leaflet.css';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <IonReactRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </IonReactRouter>,
     document.getElementById('root')
 );
 
