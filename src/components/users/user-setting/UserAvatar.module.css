@@ -1,7 +1,21 @@
 .dra-user-avatar-container {
+    position: relative;
     display: flex;
     justify-content: center;
     padding: 24px 16px;
+}
+
+.dra-user-avatar-container__action-buttons {
+    top: 58%;
+    left: 56%;
+}
+
+.dra-user-avatar-container__fab-list[side="end"]{
+    margin-inline: 50px;
+}
+
+.dra-user-avatar-container__fab-list[side="bottom"]{
+    margin: 50px 0px;
 }
 
 .dra-user-avatar-container__avatar {
