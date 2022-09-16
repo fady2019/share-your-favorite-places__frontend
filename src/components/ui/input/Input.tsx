@@ -71,7 +71,6 @@ const FormInput: React.FC<any> = (props) => {
     const blurInputHandler = (e: any) => {
         inputDispatch({
             type: InputActionTypeE.BLUR_INPUT,
-            validators: props.validators,
         });
 
         if (onBlurInput) {
@@ -83,6 +82,7 @@ const FormInput: React.FC<any> = (props) => {
         inputDispatch({
             type: InputActionTypeE.CHANGE_INPUT,
             payload: e.target.value,
+            validators: props.validators,
         });
 
         if (onEnterInput) {
