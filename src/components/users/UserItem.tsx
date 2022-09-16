@@ -8,6 +8,8 @@ import CardItem from '../ui/card-item/CardItem';
 
 import classes from './UserItem.module.css';
 
+import defImg from '../../assets/icons/default-avatar.svg';
+
 const UserItem: React.FC<UserItemI> = (props) => {
     const { id, name, imgURL, placeCount } = props.userInfo;
 
@@ -16,7 +18,7 @@ const UserItem: React.FC<UserItemI> = (props) => {
     return (
         <CardItem routerLink={`/${id}/places`}>
             <IonAvatar className={classes['user-item__avatar']} slot="start">
-                <img src={imgURL} alt={`${name}-avatar`} />
+                <img src={imgURL || defImg} alt={`${name}-avatar`} />
             </IonAvatar>
             <IonLabel>
                 <h2 className="dra-text-bold">{name}</h2>
