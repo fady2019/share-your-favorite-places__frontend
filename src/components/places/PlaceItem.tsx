@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
@@ -21,6 +21,13 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
     const dispatch = useDispatch();
 
     const { id, title, description, imgURL, address, location, creator } = props.placeInfo;
+
+    useEffect(() => {
+        return () => {
+            dispatch(uiActions.closeAppModal());
+            dispatch(uiActions.closeAppAlert());
+        };
+    }, [dispatch]);
 
     const openPlaceImageModalHandler = () => {
         dispatch(

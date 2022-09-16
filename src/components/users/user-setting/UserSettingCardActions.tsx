@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -16,6 +16,12 @@ import UserSettingPasswordConfirmationForm from './UserSettingPasswordConfirmati
 const UserSettingCardActions: React.FC<any> = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => {
+            dispatch(uiActions.closeAppModal());
+        };
+    }, [dispatch]);
 
     const openAccountDeletionAlertHandler = () => {
         dispatch(

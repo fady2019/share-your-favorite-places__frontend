@@ -30,6 +30,12 @@ const UserAvatar: React.FC<any> = () => {
     const backendURL = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
+        return () => {
+            dispatch(uiActions.closeAppModal());
+        };
+    }, [dispatch]);
+
+    useEffect(() => {
         if (!response) {
             return;
         }

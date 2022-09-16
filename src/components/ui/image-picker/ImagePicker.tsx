@@ -71,6 +71,12 @@ const ImagePicker: React.FC<any> = forwardRef((props, ref) => {
     const { valid: isFileValid } = imagePickerState;
 
     useEffect(() => {
+        return () => {
+            dispatch(uiActions.closeAppModal());
+        };
+    }, [dispatch]);
+
+    useEffect(() => {
         if (onGetFile) {
             onGetFile(filePickerName || filePickerId, imageFile, isFileValid);
         }

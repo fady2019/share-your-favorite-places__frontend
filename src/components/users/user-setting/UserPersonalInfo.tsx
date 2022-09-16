@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { pencil, codeSlash } from 'ionicons/icons';
@@ -12,6 +12,12 @@ import SlidingItemGroup from '../../ui/sliding-item-group/SlidingItemGroup';
 const UserPersonalInfo: React.FC<any> = () => {
     const username = useSelector((state: AppStoreI) => state.user.userInfo?.name) || 'user name';
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => {
+            dispatch(uiActions.closeAppModal());
+        };
+    }, [dispatch]);
 
     const changeNameHandler = () => {
         dispatch(

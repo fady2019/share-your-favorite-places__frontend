@@ -13,8 +13,10 @@ const useHttp = () => {
     useEffect(() => {
         return () => {
             activeRequests.current.forEach((reqCtrl) => reqCtrl.abort());
+            dispatch(uiActions.closeAppLoading());
+            dispatch(uiActions.closeAppNotification());
         };
-    }, []);
+    }, [dispatch]);
 
     const request = useCallback(
         async (url: string, opt: RequestInit = {}) => {

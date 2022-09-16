@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { pencil, person, key, calendar } from 'ionicons/icons';
@@ -14,6 +14,12 @@ const UserAccountInfo: React.FC<any> = () => {
     const userEmail = useSelector((state: AppStoreI) => state.user.userInfo?.email) || 'user email';
     const createdAt = useSelector((state: AppStoreI) => state.user.userInfo?.createdAt) || 'creation date';
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        return () => {
+            dispatch(uiActions.closeAppModal());
+        };
+    }, [dispatch]);
 
     const changeEmailHandler = () => {
         dispatch(
