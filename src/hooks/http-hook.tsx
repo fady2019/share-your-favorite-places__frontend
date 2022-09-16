@@ -20,6 +20,8 @@ const useHttp = () => {
 
     const request = useCallback(
         async (url: string, opt: RequestInit = {}) => {
+            dispatch(uiActions.closeAppNotification());
+
             dispatch(
                 uiActions.openAppLoading({
                     isOpen: true,
