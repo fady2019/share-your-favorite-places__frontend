@@ -9,6 +9,8 @@ import { AppStoreI } from '../../../interfaces/store';
 
 import DraScrollbar from '../../ui/scrollbar/DraScrollbar';
 
+import classes from './AppMenuContent.module.css';
+
 const MENU_ITEMS = (userId: string) => [
     {
         id: 'USER_MENU_ITEM',
@@ -72,23 +74,31 @@ const AppMenuContent: React.FC<any> = (props) => {
                     })}
                 </IonList>
 
-                {isAuth && (
+                <div className={classes['dra-app-menu-actions']}>
+                    {isAuth && (
+                        <IonButton
+                            className={classes['dra-app-menu-actions__btn']}
+                            expand="block"
+                            strong
+                            color="warning"
+                            fill="outline"
+                            type="button"
+                            onClick={logoutHandler}
+                        >
+                            Logout
+                        </IonButton>
+                    )}
+
                     <IonButton
-                        className="ion-margin"
+                        className={classes['dra-app-menu-actions__btn']}
                         expand="block"
                         strong
                         color="warning"
-                        fill="outline"
-                        type="button"
-                        onClick={logoutHandler}
+                        onClick={onCloseMenu}
                     >
-                        Logout
+                        Close
                     </IonButton>
-                )}
-
-                <IonButton className="ion-margin" expand="block" strong color="warning" onClick={onCloseMenu}>
-                    Close
-                </IonButton>
+                </div>
             </DraScrollbar>
         </IonContent>
     );
