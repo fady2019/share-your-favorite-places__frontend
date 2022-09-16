@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-import { IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonImg } from '@ionic/react';
+import { IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
 
 import { uiActions } from '../../store/slices/ui/ui-slice';
 
@@ -10,6 +10,7 @@ import { PlaceItemI } from '../../interfaces/places';
 
 import PlaceCardActions from './PlaceCardActions';
 
+import ImageModalContent from '../shared/image-modal/ImageModalContent';
 import Card from '../ui/card/Card';
 import Map from '../map/Map';
 
@@ -26,11 +27,7 @@ const PLaceItem: React.FC<PlaceItemI> = (props) => {
             uiActions.openAppModal({
                 isOpen: true,
                 title: title,
-                content: (
-                    <div className={classes['dra-place-card__place-image-modal']}>
-                        <IonImg className={classes['img']} src={imgURL} />
-                    </div>
-                ),
+                content: <ImageModalContent image={imgURL} />,
             })
         );
     };

@@ -30,18 +30,6 @@
     cursor: pointer;
 }
 
-.dra-image-picker__image-preview-modal {
-    background-color: var(--ion-color-dark);
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.dra-image-picker__image-preview-modal > .img {
-    height: 100%;
-}
-
 .dra-image-picker__custom-input .file-name {
     width: 90%;
     height: 100%;

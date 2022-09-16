@@ -17,6 +17,7 @@ import { close } from 'ionicons/icons';
 import { ImagePickerActionTypeE } from '../../../interfaces/image-picker';
 import { imagePickerInitState, imagePickerReducer } from './image-picker-utilities';
 
+import ImageModalContent from '../../shared/image-modal/ImageModalContent';
 import InputLabel from '../input-label/InputLabel';
 import InputError from '../input-error/InputError';
 
@@ -38,7 +39,7 @@ const getAttributes = (props: any) => {
 
 const ImagePicker: React.FC<any> = forwardRef((props, ref) => {
     const isHidden = !!props.hidden;
-    
+
     const initialIsValid = !!props.valid;
     const initialPreviewURL = props.value; // props.value is the src of file
 
@@ -128,11 +129,7 @@ const ImagePicker: React.FC<any> = forwardRef((props, ref) => {
             uiActions.openAppModal({
                 isOpen: true,
                 title: '',
-                content: (
-                    <div className={classes['dra-image-picker__image-preview-modal']}>
-                        <IonImg className={classes['img']} src={imgPreviewURL} />
-                    </div>
-                ),
+                content: <ImageModalContent image={imgPreviewURL} />,
             })
         );
     };
