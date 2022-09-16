@@ -20,8 +20,8 @@ const getAttributes = (props: any) => {
     delete attributes?.onIonFocus;
     delete attributes?.onBlur;
     delete attributes?.onIonBlur;
-    delete attributes?.onChange;
-    delete attributes?.onIonChange;
+    delete attributes?.onInput;
+    delete attributes?.onIonInput;
     delete attributes?.value;
     delete attributes?.valid;
 
@@ -45,7 +45,7 @@ const FormInput: React.FC<any> = (props) => {
 
     const onFocusInput = props.onIonFocus || props.onFocus;
     const onBlurInput = props.onIonBlur || props.onBlur;
-    const onChangeInput = props.onIonChange || props.onChange;
+    const onEnterInput = props.onIonInput || props.onInput;
 
     const inputAttributes = getAttributes(props);
 
@@ -79,14 +79,14 @@ const FormInput: React.FC<any> = (props) => {
         }
     };
 
-    const changeInputHandler = (e: any) => {
+    const enterInputHandler = (e: any) => {
         inputDispatch({
             type: InputActionTypeE.CHANGE_INPUT,
             payload: e.target.value,
         });
 
-        if (onChangeInput) {
-            onChangeInput(e);
+        if (onEnterInput) {
+            onEnterInput(e);
         }
     };
 
@@ -100,8 +100,7 @@ const FormInput: React.FC<any> = (props) => {
         value: inputState.value,
         onIonFocus: focusInputHandler,
         onIonBlur: blurInputHandler,
-        onIonChange: changeInputHandler,
-        onIonInput: props.onIonInput || props.onInput,
+        onIonInput: enterInputHandler,
     };
 
     return (
