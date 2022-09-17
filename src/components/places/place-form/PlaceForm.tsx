@@ -1,4 +1,5 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { IonButton } from '@ionic/react';
@@ -17,6 +18,9 @@ import FormInput from '../../ui/input/Input';
 import FormActions from '../../shared/FormActions';
 
 const PlaceForm: React.FC<PlaceFormI> = (props) => {
+    const history = useHistory();
+
+    const userId = useSelector((state: AppStoreI) => state.user.userInfo?.id);
     const token = useSelector((state: AppStoreI) => state.auth.token);
 
     const { formState, getInputHandler } = useForm<PlaceFormStateInputsI>(placeFormInitialState);
@@ -26,7 +30,15 @@ const PlaceForm: React.FC<PlaceFormI> = (props) => {
     const isFormValid = formState.valid;
 
     const backendURL = process.env.REACT_APP_BACKEND_URL;
-    const { request } = useHttp();
+    const { request, response } = useHttp();
+
+    useEffect(() => {
+        if (!response) {
+            return;
+        }
+
+        history.replace(`/${userId}/places`);
+    }, [response, history, userId]);
 
     const submitFormHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
