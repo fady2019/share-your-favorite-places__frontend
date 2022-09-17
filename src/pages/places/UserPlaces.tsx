@@ -19,6 +19,8 @@ const UserPlaces: React.FC<any> = () => {
     const [places, setPlaces] = useState<PLaceI[]>([]);
     const { userId } = useParams<{ userId: string }>();
 
+    const showPlacesContainer = !!response && !isLoading;
+
     const backendURL = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
@@ -33,7 +35,7 @@ const UserPlaces: React.FC<any> = () => {
         if (response.placeId) {
             setPlaces((crtPlaces) => crtPlaces.filter((place) => place.id !== response.placeId));
         }
-    }, [response]);
+    }, [response, setPlaces]);
 
     useEffect(() => {
         const reqURL = `${backendURL}/places/user/${userId}`;
@@ -51,7 +53,7 @@ const UserPlaces: React.FC<any> = () => {
         });
     };
 
-    return <>{!isLoading && <PlacesContainer places={places} onDelete={deletePlaceHandler} />}</>;
+    return <>{showPlacesContainer && <PlacesContainer places={places} onDelete={deletePlaceHandler} />}</>;
 };
 
 export default UserPlaces;
