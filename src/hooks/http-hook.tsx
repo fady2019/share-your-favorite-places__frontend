@@ -33,7 +33,13 @@ const useHttp = () => {
             activeRequests.current.push(reqAbortCtrl);
 
             try {
-                const fetchedResponse = await fetch(url, { ...opt, signal: reqAbortCtrl.signal });
+                let fetchedResponse;
+
+                try {
+                    fetchedResponse = await fetch(url, { ...opt, signal: reqAbortCtrl.signal });
+                } catch (error) {
+                    throw new Error('something wrong has been occurred, please try again later!');
+                }
 
                 activeRequests.current.filter((ctrl) => ctrl !== reqAbortCtrl);
 

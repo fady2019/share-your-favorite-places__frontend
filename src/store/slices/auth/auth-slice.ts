@@ -32,26 +32,39 @@ const refreshToken = (token: AuthTokenI, isAutoLogin: boolean = false): any => {
                 );
             }
 
-            const response = await fetch(reqURL, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${token.id}`,
-                },
-            });
+            try {
+                let response;
 
-            if (!response.ok) {
-                dispatch(logout());
+                try {
+                    response = await fetch(reqURL, {
+                        method: 'POST',
+                        headers: {
+                            Authorization: `Bearer ${token.id}`,
+                        },
+                    });
+                } catch (error) {
+                    throw new Error('something wrong has been occurred, please try again later!');
+                }
+
+                if (response && !response.ok) {
+                    dispatch(logout());
+
+                    throw new Error('something wrong has been occurred, please login in again!');
+                } else if (response) {
+                    const data = await response.json();
+
+                    dispatch(login(data));
+                }
+            } catch (err: any) {
+                const errorMsg = err.message || 'something wrong has been occurred!';
+
                 dispatch(
                     uiActions.openAppNotification({
                         isOpen: true,
                         hasError: true,
-                        message: 'something wrong has been occurred!, please login in again!',
+                        message: errorMsg,
                     })
                 );
-            } else {
-                const data = await response.json();
-
-                dispatch(login(data));
             }
 
             if (isAutoLogin) {
