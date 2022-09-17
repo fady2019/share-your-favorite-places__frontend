@@ -11,20 +11,22 @@ const Users: React.FC = () => {
     const isLoading = useSelector((state: AppStoreI) => state.ui.appLoading.isOpen);
     const [users, setUsers] = useState<UserI[]>([]);
 
+    const showUsersContainer = !!response && !isLoading;
+
     const backendURL = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
         if (response) {
             setUsers(response.users);
         }
-    }, [response]);
+    }, [response, setUsers]);
 
     useEffect(() => {
         const reqURL = `${backendURL}/users`;
         request(reqURL);
-    }, [request]);
+    }, [request, backendURL]);
 
-    return <>{!isLoading && <UsersContainer users={users} />}</>;
+    return <>{showUsersContainer && <UsersContainer users={users} />}</>;
 };
 
 export default Users;
