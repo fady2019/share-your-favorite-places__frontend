@@ -1,0 +1,17 @@
+.dra-menu-footer__toolbar {
+    --min-height: 55px;
+    text-align: center;
+}
+
+.dra-menu-footer__paragraph {
+    padding: 0 16px;
+}
+
+.dra-menu-footer__paragraph > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dra-menu-footer__paragraph a {
+    color: var(--ion-color-warning);
+}
