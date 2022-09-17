@@ -1,14 +1,16 @@
-const setItem = (key: string, value: any, expDays: number = 1) => {
+const setItem = (key: string, value: any, expDays: number = 1, path: string = '/') => {
     const cookie = getItem(key);
 
     let expires = new Date(new Date().getTime() + expDays * 24 * 60 * 60 * 1000).toUTCString();
 
     if (cookie) {
         expires = cookie.metadata.expires;
+        path = cookie.metadata.path;
     }
 
     const cookieMetadata = {
         expires: expires,
+        path: path,
     };
 
     const cookieValue = JSON.stringify({
@@ -16,7 +18,7 @@ const setItem = (key: string, value: any, expDays: number = 1) => {
         metadata: cookieMetadata,
     });
 
-    document.cookie = `${key}=${cookieValue}; path=/; expires=${expires}`;
+    document.cookie = `${key}=${cookieValue}; path=${path}; expires=${expires}`;
 };
 
 const getItem = (key: string) => {
