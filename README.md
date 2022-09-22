@@ -4,7 +4,7 @@
 
 This is the frontend of the Share-Favorite-Places app, also you can find the backend <a href="https://github.com/fady2019/share-your-favorite-places__backend" target="_blank">here</a>, the idea behind this app is simply sharing your own favorite places with people.
 
-<a href="https://share-fav-places.netlify.app/" target="_blank">Live Preview</a>
+<a href="https://share-fav-places.firebaseapp.com/" target="_blank">Live Preview</a>
 
 ### Built With
 
