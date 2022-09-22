@@ -1,8 +1,10 @@
 [![Version][version-shield]][version-url]
 
-## About The Project
+## About The Project 
 
 This is the frontend of the Share-Favorite-Places app, also you can find the backend <a href="https://github.com/fady2019/share-your-favorite-places__backend" target="_blank">here</a>, the idea behind this app is simply sharing your own favorite places with people.
+
+<a href="https://share-fav-places.netlify.app/" target="_blank">Live Preview</a>
 
 ### Built With
 
@@ -16,6 +18,8 @@ This is the frontend of the Share-Favorite-Places app, also you can find the bac
 * <a href="https://redux-toolkit.js.org/" target="_blank">redux-toolkit</a>
 * <a href="https://reactrouter.com/" target="_blank">react-router</a>
 * <a href="https://leafletjs.com/" target="_blank">leaflet</a>
+
+
 
 [version-shield]: https://img.shields.io/badge/Version-1.0.0-green
 [version-url]: https://github.com/fady2019/share-your-favorite-places__backend
